@@ -416,6 +416,9 @@ body{overflow-x:hidden}
   .steps::before{display:none}
   .step{padding-bottom:8px}
   .prompt-lib{grid-template-columns:1fr !important;gap:16px}
+  .video-grid{grid-template-columns:1fr !important;gap:16px}
+  .video-card.wide{grid-column:span 1 !important}
+  .video-card.wide video{aspect-ratio:16/9 !important}
   .contact{padding:100px 8vw}
   .contact .big{font-size:clamp(40px,11vw,68px)}
   .foot{flex-direction:column;gap:8px;text-align:center}
@@ -452,6 +455,19 @@ body{overflow-x:hidden}
 .p-modal-foot{padding:20px 32px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:flex-end;gap:12px}
 .p-toast{position:fixed;bottom:40px;left:50%;transform:translateX(-50%) translateY(20px);background:#d13178;color:#fff;padding:12px 26px;border-radius:999px;font-size:13px;opacity:0;transition:all .3s;z-index:300;pointer-events:none}
 .p-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ===== VIDEO SECTION ===== */
+.video-grid{margin-top:60px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.video-card{position:relative;border-radius:16px;overflow:hidden;background:#0d0d0d;border:1px solid rgba(255,255,255,.08)}
+.video-card video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block}
+.video-card.wide{grid-column:span 3}
+.video-card.wide video{aspect-ratio:16/9}
+.video-card .v-label{
+  position:absolute;left:0;right:0;bottom:0;padding:20px;
+  background:linear-gradient(transparent,rgba(0,0,0,.85));color:#fff;
+}
+.video-card .v-label h4{font-size:16px;font-weight:700}
+.video-card .v-label p{font-size:12px;color:#9a9a9a;margin-top:4px}
 </style>
 </head>
 <body>
@@ -466,6 +482,7 @@ body{overflow-x:hidden}
     <a href="#about">关于</a>
     <a href="#timeline">作品目录</a>
     <a href="#prompts">提示词库</a>
+    <a href="#videos">视频作品</a>
     <a href="#contact">联系</a>
   </div>
 </nav>
@@ -574,10 +591,34 @@ body{overflow-x:hidden}
   </div>
 </section>
 
+
+<!-- VIDEO -->
+<section class="section" id="videos">
+  <div class="reveal">
+    <div class="kicker">04 — 视频作品</div>
+    <h2>动态视觉<br><em>持续输出。</em></h2>
+    <p class="lead">AI 生成的短视频作品，从场景到人物，全部可商用。</p>
+  </div>
+  <div class="video-grid reveal">
+    <div class="video-card">
+      <video autoplay muted loop playsinline src="assets/video/snow.mp4"></video>
+      <div class="v-label"><h4>滑雪场景</h4><p>AI 生成 · 竖屏 · 15s</p></div>
+    </div>
+    <div class="video-card">
+      <video autoplay muted loop playsinline src="assets/video/truck.mp4"></video>
+      <div class="v-label"><h4>物流运输</h4><p>AI 生成 · 竖屏 · 8s</p></div>
+    </div>
+    <div class="video-card">
+      <video autoplay muted loop playsinline src="assets/video/huichuan.mp4"></video>
+      <div class="v-label"><h4>慧川 AI 创意短片</h4><p>AI 生成 · 横屏 · 120s</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="section alt contact" id="contact">
   <div class="reveal">
-    <div class="kicker">04 — 联系</div>
+    <div class="kicker">05 — 联系</div>
     <div class="pre">有项目想聊？</div>
     <div class="big">Let's make something real.</div>
     <p>电竞视觉 / 电商产品图 / 人物 COS 场景 / 品牌 campaign</p>
