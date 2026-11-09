@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AIGC 作品 · 电竞视觉作品集</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -385,35 +386,38 @@ body{overflow-x:hidden}
 .lightbox .lb-next{right:24px;top:50%;transform:translateY(-50%)}
 
 @media(max-width:900px){
-  /* 导航：两行布局，不挤 */
-  .nav{padding:12px 16px;flex-wrap:wrap;gap:6px;background:rgba(0,0,0,.9)}
+  /* 导航：logo 一行，链接一行横向滚动 */
+  .nav{padding:12px 16px;flex-wrap:wrap;gap:6px;background:rgba(0,0,0,.92)}
   .nav .logo{font-size:14px;width:100%}
   .nav-links{gap:16px;font-size:11px;overflow-x:auto;white-space:nowrap;width:100%;justify-content:flex-start;-webkit-overflow-scrolling:touch}
   .nav-links a{padding:4px 0}
 
-  /* Hero：满屏，视频上移露上半身，底部 40% 纯黑遮产品图 */
-  .hero{height:100vh;min-height:100vh}
-  .hero-bg video{object-position:center 12%;filter:brightness(.8)}
+  /* Hero：收窄到 68vh，视频 cover 后底部产品图自然裁掉 */
+  .hero{height:68vh !important;min-height:0 !important}
+  .hero-bg video{object-position:center top;filter:brightness(.75)}
   .hero-bg::after{
     background:
-      linear-gradient(180deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 45%,rgba(0,0,0,.98) 100%),
+      linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 60%,rgba(0,0,0,.95) 100%),
       linear-gradient(90deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,.55) 60%,rgba(0,0,0,0) 100%);
   }
-  .hero-content{max-width:100%;padding:0 8vw;justify-content:center;padding-bottom:20vh}
-  .hero-kicker{font-size:10px;margin-bottom:14px}
-  .hero-title{font-size:clamp(36px,10.5vw,60px);line-height:1.08}
-  .hero-sub{font-size:13.5px;margin-top:16px;line-height:1.6}
-  .hero-meta{margin-top:24px;gap:16px;flex-wrap:wrap}
-  .hero-meta strong{font-size:17px}
+  .hero-content{max-width:100%;padding:0 8vw;justify-content:flex-end;padding-bottom:5vh}
+  .hero-kicker{font-size:10px;margin-bottom:12px}
+  .hero-title{font-size:clamp(34px,10vw,56px);line-height:1.1}
+  .hero-sub{font-size:13px;margin-top:14px;line-height:1.6}
+  .hero-meta{margin-top:20px;gap:14px;flex-wrap:wrap}
+  .hero-meta strong{font-size:16px}
 
   /* 区块 padding 收紧 */
-  .section{padding:90px 8vw}
-  .about-grid{grid-template-columns:1fr;gap:32px}
-  .tl-wrap{grid-template-columns:1fr;gap:24px}
-  .steps{grid-template-columns:1fr !important;gap:20px}
-  .prompt-lib{grid-template-columns:1fr;gap:16px}
+  .section{padding:80px 8vw}
+  .about-grid{grid-template-columns:1fr !important;gap:32px;margin-top:48px}
+  .about-img{aspect-ratio:4/3}
+  .tl-wrap{grid-template-columns:1fr !important;gap:24px}
+  .steps{grid-template-columns:1fr !important;gap:28px}
+  .steps::before{display:none}
+  .step{padding-bottom:8px}
+  .prompt-lib{grid-template-columns:1fr !important;gap:16px}
   .contact{padding:100px 8vw}
-  .contact .big{font-size:clamp(44px,12vw,72px)}
+  .contact .big{font-size:clamp(40px,11vw,68px)}
   .foot{flex-direction:column;gap:8px;text-align:center}
   .modal-body{grid-template-columns:1fr !important;padding:24px 6vw 60px}
   .modal-body img,.m-a,.m-b,.m-c,.m-d,.m-e,.m-f,.m-g{grid-column:span 1 !important;aspect-ratio:4/3 !important}
