@@ -3,25 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AIGC Portfolio · 启动</title>
+<title>AIGC Portfolio · 电竞视觉档案</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@400;500;700;900&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f4f2ee;
-  --ink:#111;
-  --ink-2:#555;
-  --ink-3:#9a9a9a;
-  --line:#d9d6cf;
-  --red:#e63329;
+  --bg:#07070d;
+  --bg-2:#0d0d16;
+  --ink:#f4f4f8;
+  --ink-2:#a8a8b8;
+  --ink-3:#6b6b7c;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(209,49,120,.35);
+  --accent:#d13178;
+  --accent-2:#ff4d97;
+  --accent-deep:#8a1f4e;
   --cyan:#2bb8c9;
-  --pink:#f089b3;
   --orange:#ff8a2a;
   --purple:#8a5cf0;
-  --slate:#5b7a99;
-  --grey:#3a3a3a;
 }
 html,body{height:100%;background:var(--bg);color:var(--ink);
   font-family:"Inter","PingFang SC","Microsoft YaHei",sans-serif;
@@ -30,22 +31,40 @@ html,body{height:100%;background:var(--bg);color:var(--ink);
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 
+/* 背景网格 + 玫红辉光 */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(1200px 600px at 75% 20%, rgba(209,49,120,.18), transparent 60%),
+    radial-gradient(800px 500px at 15% 80%, rgba(138,92,240,.08), transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse at center, #000 30%, transparent 80%);
+}
+
+/* 色谱条 */
+.spectrum{
+  position:fixed;top:0;left:0;right:0;height:6px;z-index:50;
+  display:grid;grid-template-columns:repeat(7,1fr);
+}
+.spectrum span{display:block;height:100%}
+
 .stage{
+  position:relative;z-index:1;
   height:100vh;display:grid;
   grid-template-columns:minmax(360px,38%) 1fr;
   gap:0;
 }
 
-/* 色谱条 */
-.spectrum{
-  position:fixed;top:0;left:0;right:0;height:10px;z-index:50;
-  display:grid;grid-template-columns:repeat(7,1fr);
-}
-.spectrum span{display:block;height:100%}
-
 /* 左栏 */
 .left{
-  padding:60px 48px 32px;
+  padding:56px 48px 32px;
   display:flex;flex-direction:column;justify-content:space-between;
   border-right:1px solid var(--line);
   position:relative;z-index:2;
@@ -54,88 +73,132 @@ img{display:block;max-width:100%}
   display:flex;justify-content:space-between;align-items:center;
   font-size:13px;letter-spacing:.02em;
 }
-.brand .logo{font-weight:700}
-.brand .logo em{font-style:normal;color:var(--pink)}
-.brand .year{color:var(--ink-3);font-size:11px;letter-spacing:.2em}
+.brand .logo{
+  font-weight:900;letter-spacing:.08em;
+  font-family:"Orbitron","Inter",sans-serif;
+}
+.brand .logo em{font-style:normal;color:var(--accent-2)}
+.brand .year{
+  color:var(--ink-3);font-size:11px;letter-spacing:.2em;
+  font-family:"Orbitron",sans-serif;
+}
 
-.hero-block{margin-top:40px}
+.hero-block{margin-top:44px;position:relative}
 .slash{
-  font-family:"Noto Serif SC",serif;
-  font-size:120px;font-weight:900;line-height:.85;
-  color:var(--ink);letter-spacing:-.02em;
+  font-family:"Orbitron",sans-serif;
+  font-size:120px;font-weight:900;line-height:.8;
+  background:linear-gradient(135deg, #fff 0%, var(--accent-2) 55%, var(--accent) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:-.02em;
+  filter:drop-shadow(0 0 24px rgba(209,49,120,.45));
 }
 .slash small{
   display:block;margin-top:18px;
   font-family:"Inter",sans-serif;
-  font-size:11px;font-weight:400;letter-spacing:.3em;
+  font-size:11px;font-weight:500;letter-spacing:.32em;
   color:var(--ink-2);text-transform:uppercase;
 }
 .hero-block h1{
-  margin-top:28px;
+  margin-top:26px;
   font-family:"Noto Serif SC",serif;
-  font-size:clamp(24px,2.4vw,34px);font-weight:700;
+  font-size:clamp(26px,2.4vw,36px);font-weight:900;
   line-height:1.25;letter-spacing:-.01em;
 }
-.hero-block h1 em{font-style:italic;color:var(--pink)}
+.hero-block h1 em{
+  font-style:normal;
+  background:linear-gradient(135deg, var(--accent-2), var(--accent));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
 .hero-block p{
   margin-top:18px;color:var(--ink-2);
-  font-size:13px;line-height:1.7;max-width:340px;
+  font-size:13px;line-height:1.75;max-width:340px;
+}
+
+.tag-row{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.tag{
+  font-family:"Orbitron",sans-serif;
+  font-size:10px;letter-spacing:.18em;
+  padding:6px 10px;border:1px solid var(--line-2);
+  color:var(--accent-2);border-radius:2px;
+  background:rgba(209,49,120,.08);
+  text-transform:uppercase;
 }
 
 .stats{
   margin-top:32px;display:flex;gap:28px;flex-wrap:wrap;
+  padding-top:22px;border-top:1px solid var(--line);
 }
-.stats div{font-size:11px;letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase}
+.stats div{font-size:10px;letter-spacing:.18em;color:var(--ink-3);text-transform:uppercase}
 .stats b{
-  display:block;font-family:"Noto Serif SC",serif;
-  color:var(--ink);font-size:20px;font-weight:700;letter-spacing:0;
+  display:block;font-family:"Orbitron",sans-serif;
+  color:var(--ink);font-size:24px;font-weight:900;letter-spacing:0;
   text-transform:none;margin-bottom:2px;
 }
+.stats b i{font-style:normal;color:var(--accent-2)}
 
 .footer{
   display:flex;justify-content:space-between;align-items:flex-end;
   padding-top:24px;border-top:1px solid var(--line);
 }
-.footer .links{display:flex;flex-direction:column;gap:6px;font-size:12px}
-.footer .links a{color:var(--ink-2)}
+.footer .links{display:flex;flex-direction:column;gap:8px;font-size:12px}
+.footer .links a{color:var(--ink-2);transition:color .2s}
 .footer .links a:hover{color:var(--ink)}
 .footer .links a.primary{
-  display:inline-block;margin-top:8px;
-  padding:10px 18px;border-radius:999px;
-  background:var(--ink);color:#fff;font-weight:500;
+  display:inline-flex;align-items:center;gap:8px;margin-top:10px;
+  padding:12px 20px;border-radius:999px;
+  background:linear-gradient(135deg, var(--accent-2), var(--accent));
+  color:#fff;font-weight:700;letter-spacing:.06em;
+  box-shadow:0 8px 28px rgba(209,49,120,.45);
+  transition:transform .2s, box-shadow .2s;
 }
-.footer .cc{font-size:10px;color:var(--ink-3);letter-spacing:.1em;text-align:right;line-height:1.6}
+.footer .links a.primary:hover{
+  transform:translateY(-1px);
+  box-shadow:0 12px 36px rgba(209,49,120,.6);
+}
+.footer .cc{font-size:10px;color:var(--ink-3);letter-spacing:.14em;text-align:right;line-height:1.7}
+.footer .cc b{color:var(--accent-2);font-family:"Orbitron",sans-serif;font-weight:700}
 
-/* 右栏 · 海报墙 */
+/* 右栏 · 扑克堆叠 */
 .right{
   position:relative;overflow:hidden;
   padding:60px 40px;
   height:100vh;
 }
+.right::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(600px 300px at 60% 60%, rgba(209,49,120,.12), transparent 70%);
+}
 
 .poster{
   position:absolute;overflow:hidden;
   cursor:pointer;
-  background:#ddd;
-  border-radius:14px;
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
-  transition:transform .5s cubic-bezier(.2,.7,.2,1),z-index 0s;
+  background:#14141c;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.6),
+    0 0 0 1px rgba(209,49,120,.15);
+  transition:transform .5s cubic-bezier(.2,.7,.2,1), z-index 0s, box-shadow .4s;
   width:54%;
   aspect-ratio:16/10;
 }
 .poster:hover{
-  transform:translateX(12px) rotate(0deg) scale(1.03) !important;
+  transform:translateX(12px) rotate(0deg) scale(1.04) !important;
   z-index:99 !important;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.7),
+    0 0 40px rgba(209,49,120,.35);
 }
 .poster img{
   width:100%;height:100%;object-fit:cover;
-  transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .4s;
+  transition:transform .8s cubic-bezier(.2,.7,.2,1), filter .4s;
+  filter:saturate(1.05) contrast(1.02);
 }
 .poster:hover img{transform:scale(1.05)}
 .poster .label{
   position:absolute;left:0;right:0;bottom:0;
-  padding:14px 14px 12px;
-  background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.75) 100%);
+  padding:16px 14px 12px;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.85) 100%);
   color:#fff;
 }
 .poster .label .name{
@@ -143,50 +206,38 @@ img{display:block;max-width:100%}
   font-size:14px;font-weight:700;line-height:1.2;
 }
 .poster .label .meta{
-  margin-top:4px;font-size:10px;letter-spacing:.15em;
-  color:rgba(255,255,255,.7);text-transform:uppercase;
+  margin-top:4px;font-size:10px;letter-spacing:.18em;
+  color:var(--accent-2);text-transform:uppercase;
+  font-family:"Orbitron",sans-serif;
 }
 .poster .swatch{
   position:absolute;top:12px;left:12px;
   width:10px;height:10px;border-radius:50%;
-  box-shadow:0 0 0 3px rgba(255,255,255,.85);
+  background:var(--accent);
+  box-shadow:0 0 0 3px rgba(255,255,255,.85), 0 0 12px var(--accent);
 }
-
-/* 错落布局 */
-.p-red    {grid-column:span 2;grid-row:span 2}
-.p-cyan   {grid-column:span 2;grid-row:span 1}
-.p-pink   {grid-column:span 1;grid-row:span 1}
-.p-orange {grid-column:span 1;grid-row:span 1}
-.p-purple {grid-column:span 2;grid-row:span 1}
-.p-slate  {grid-column:span 1;grid-row:span 1}
-.p-grey   {grid-column:span 1;grid-row:span 1}
 
 /* Lightbox */
 .lb{
   position:fixed;inset:0;z-index:100;
-  background:rgba(20,20,20,.94);backdrop-filter:blur(10px);
+  background:rgba(8,8,14,.95);backdrop-filter:blur(12px);
   display:none;align-items:center;justify-content:center;
-  padding:6vh 6vw;
 }
 .lb.open{display:flex}
-.lb img{
-  max-width:100%;max-height:86vh;object-fit:contain;
-  box-shadow:0 30px 80px rgba(0,0,0,.5);
-}
+.lb img{max-width:86vw;max-height:80vh;border-radius:8px;border:1px solid var(--line-2)}
 .lb .close{
   position:absolute;top:24px;right:24px;
-  background:none;border:1px solid rgba(255,255,255,.3);
-  color:#fff;border-radius:999px;padding:8px 18px;
+  background:none;border:1px solid var(--line-2);color:#fff;
+  padding:10px 16px;border-radius:999px;
   font-size:12px;cursor:pointer;letter-spacing:.1em;
 }
 .lb .cap{
-  position:absolute;left:6vw;bottom:4vh;color:#aaa;
+  position:absolute;left:6vw;bottom:4vh;color:var(--ink-2);
   font-size:12px;letter-spacing:.05em;max-width:600px;
 }
 .lb .cap b{color:#fff;font-family:"Noto Serif SC",serif;
   font-size:15px;display:block;margin-bottom:4px}
 
-/* 小屏 */
 @media(max-width:900px){
   html,body{overflow:auto}
   .stage{height:auto;grid-template-columns:1fr}
@@ -197,19 +248,18 @@ img{display:block;max-width:100%}
   .poster:hover{transform:scale(1.02) !important}
   .slash{font-size:80px}
 }
-}
 </style>
 </head>
 <body>
 
 <div class="spectrum">
-  <span style="background:var(--red)"></span>
-  <span style="background:var(--cyan)"></span>
-  <span style="background:var(--pink)"></span>
-  <span style="background:var(--orange)"></span>
-  <span style="background:var(--purple)"></span>
-  <span style="background:var(--slate)"></span>
-  <span style="background:var(--grey)"></span>
+  <span style="background:linear-gradient(90deg,#d13178,#ff4d97)"></span>
+  <span style="background:linear-gradient(90deg,#d13178,#8a5cf0)"></span>
+  <span style="background:linear-gradient(90deg,#8a5cf0,#2bb8c9)"></span>
+  <span style="background:linear-gradient(90deg,#2bb8c9,#0d0d16)"></span>
+  <span style="background:linear-gradient(90deg,#0d0d16,#3a3a3a)"></span>
+  <span style="background:linear-gradient(90deg,#3a3a3a,#d13178)"></span>
+  <span style="background:#d13178"></span>
 </div>
 
 <main class="stage">
@@ -217,20 +267,26 @@ img{display:block;max-width:100%}
   <aside class="left">
     <div>
       <div class="brand">
-        <div class="logo">AIGC<em>/</em>portfolio</div>
+        <div class="logo">AIGC<em>//</em>ESPORTS</div>
         <div class="year">© 2026 · GZ</div>
       </div>
 
       <div class="hero-block">
         <div class="slash">/
-          <small>typo/graphic archive · launch</small>
+          <small>award-winning visual archive · vol.01</small>
         </div>
-        <h1>把品牌素材，<br>变成<em>可商用的电竞视觉。</em></h1>
-        <p>49 张 AI 生成作品，按情绪归档。从红黑张力到紫粉霓虹，每一组都是一种视觉语言。</p>
+        <h1>把品牌素材，<br>变成<em>获奖级电竞视觉。</em></h1>
+        <p>49 张超高清 AI 生成作品，按情绪系列归档。RAW 画质 · 高细节 · 霓虹美学，每一组都是一种可商用的视觉语言。</p>
+        <div class="tag-row">
+          <span class="tag">RAW</span>
+          <span class="tag">8K</span>
+          <span class="tag">NEO-NOIR</span>
+          <span class="tag">ESPORTS</span>
+        </div>
       </div>
 
       <div class="stats">
-        <div><b>49</b>张精选图</div>
+        <div><b>49<i>+</i></b>张精选图</div>
         <div><b>7</b>个情绪系列</div>
         <div><b>03–09</b>月跨度</div>
       </div>
@@ -244,7 +300,8 @@ img{display:block;max-width:100%}
         <a class="primary" href="index-v2.html">进入作品集 →</a>
       </div>
       <div class="cc">
-        workflow<br>MJ · Flux · LoRA<br>PS · LR
+        <b>WORKFLOW</b><br>
+        MJ · Flux · LoRA<br>PS · LR
       </div>
     </div>
   </aside>
@@ -263,19 +320,19 @@ img{display:block;max-width:100%}
 
 <script>
 const series = [
-  {id:"red",    cls:"p-red",    color:"#e63329", month:"2026.03", name:"红黑电竞 · RO姬",
+  {id:"red",    color:"#e63329", month:"2026.03", name:"红黑电竞 · RO姬",
    thumb:"assets/red/r4.jpg", works:10},
-  {id:"cyan",   cls:"p-cyan",   color:"#2bb8c9", month:"2026.04", name:"蓝青冷色 · 初音",
+  {id:"cyan",   color:"#2bb8c9", month:"2026.04", name:"蓝青冷色 · 初音",
    thumb:"assets/cyan/c4.jpg", works:12},
-  {id:"pink",   cls:"p-pink",   color:"#f089b3", month:"2026.05", name:"粉白柔美 · 奶白桌搭",
+  {id:"pink",   color:"#f089b3", month:"2026.05", name:"粉白柔美 · 奶白桌搭",
    thumb:"assets/pink/p1.jpg", works:7},
-  {id:"orange",  cls:"p-orange", color:"#ff8a2a", month:"2026.06", name:"橙黄暖调 · 灯牌",
+  {id:"orange",  color:"#ff8a2a", month:"2026.06", name:"橙黄暖调 · 灯牌",
    thumb:"assets/orange/o2.jpg", works:5},
-  {id:"purple",  cls:"p-purple", color:"#8a5cf0", month:"2026.07", name:"紫粉霓虹 · ROG",
+  {id:"purple",  color:"#8a5cf0", month:"2026.07", name:"紫粉霓虹 · ROG",
    thumb:"assets/purple/u1.jpg", works:9},
-  {id:"slate",   cls:"p-slate",  color:"#5b7a99", month:"2026.08", name:"产品特写 · 耳机",
+  {id:"slate",   color:"#5b7a99", month:"2026.08", name:"产品特写 · 耳机",
    thumb:"assets/cyan/c5.jpg", works:3},
-  {id:"grey",    cls:"p-grey",   color:"#3a3a3a", month:"2026.09", name:"无人桌搭 · 电商图",
+  {id:"grey",    color:"#3a3a3a", month:"2026.09", name:"无人桌搭 · 电商图",
    thumb:"assets/cyan/c1.jpg", works:3},
 ];
 
@@ -285,13 +342,12 @@ series.forEach((s,i)=>{
   p.className = "poster";
   p.href = "index-v2.html#timeline";
   p.innerHTML = `
-    <span class="swatch" style="background:${s.color}"></span>
+    <span class="swatch" style="background:${s.color};box-shadow:0 0 0 3px rgba(255,255,255,.85),0 0 12px ${s.color}"></span>
     <img src="${s.thumb}" alt="${s.name}">
     <div class="label">
       <div class="name">${s.name}</div>
       <div class="meta">${s.month} · ${s.works} works</div>
     </div>`;
-  // 扑克牌叠放：整叠居中，每张错位一小步 + 轻微扇形旋转
   const W = wall.clientWidth, H = wall.clientHeight;
   const n = series.length;
   const cardW = W * 0.54, cardH = cardW * 10 / 16;
@@ -312,7 +368,6 @@ series.forEach((s,i)=>{
   wall.appendChild(p);
 });
 
-// Lightbox
 const lb = document.getElementById("lb");
 function openLB(src,title,s){
   document.getElementById("lbImg").src = src;
