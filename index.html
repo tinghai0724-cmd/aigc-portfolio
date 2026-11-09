@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AIGC Portfolio · 启动</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f4f2ee;
+  --ink:#111;
+  --ink-2:#555;
+  --ink-3:#9a9a9a;
+  --line:#d9d6cf;
+  --red:#e63329;
+  --cyan:#2bb8c9;
+  --pink:#f089b3;
+  --orange:#ff8a2a;
+  --purple:#8a5cf0;
+  --slate:#5b7a99;
+  --grey:#3a3a3a;
+}
+html,body{height:100%;background:var(--bg);color:var(--ink);
+  font-family:"Inter","PingFang SC","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;overflow:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+.stage{
+  height:100vh;display:grid;
+  grid-template-columns:minmax(360px,38%) 1fr;
+  gap:0;
+}
+
+/* 色谱条 */
+.spectrum{
+  position:fixed;top:0;left:0;right:0;height:10px;z-index:50;
+  display:grid;grid-template-columns:repeat(7,1fr);
+}
+.spectrum span{display:block;height:100%}
+
+/* 左栏 */
+.left{
+  padding:60px 48px 32px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  border-right:1px solid var(--line);
+  position:relative;z-index:2;
+}
+.brand{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;letter-spacing:.02em;
+}
+.brand .logo{font-weight:700}
+.brand .logo em{font-style:normal;color:var(--pink)}
+.brand .year{color:var(--ink-3);font-size:11px;letter-spacing:.2em}
+
+.hero-block{margin-top:40px}
+.slash{
+  font-family:"Noto Serif SC",serif;
+  font-size:120px;font-weight:900;line-height:.85;
+  color:var(--ink);letter-spacing:-.02em;
+}
+.slash small{
+  display:block;margin-top:18px;
+  font-family:"Inter",sans-serif;
+  font-size:11px;font-weight:400;letter-spacing:.3em;
+  color:var(--ink-2);text-transform:uppercase;
+}
+.hero-block h1{
+  margin-top:28px;
+  font-family:"Noto Serif SC",serif;
+  font-size:clamp(24px,2.4vw,34px);font-weight:700;
+  line-height:1.25;letter-spacing:-.01em;
+}
+.hero-block h1 em{font-style:italic;color:var(--pink)}
+.hero-block p{
+  margin-top:18px;color:var(--ink-2);
+  font-size:13px;line-height:1.7;max-width:340px;
+}
+
+.stats{
+  margin-top:32px;display:flex;gap:28px;flex-wrap:wrap;
+}
+.stats div{font-size:11px;letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase}
+.stats b{
+  display:block;font-family:"Noto Serif SC",serif;
+  color:var(--ink);font-size:20px;font-weight:700;letter-spacing:0;
+  text-transform:none;margin-bottom:2px;
+}
+
+.footer{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding-top:24px;border-top:1px solid var(--line);
+}
+.footer .links{display:flex;flex-direction:column;gap:6px;font-size:12px}
+.footer .links a{color:var(--ink-2)}
+.footer .links a:hover{color:var(--ink)}
+.footer .links a.primary{
+  display:inline-block;margin-top:8px;
+  padding:10px 18px;border-radius:999px;
+  background:var(--ink);color:#fff;font-weight:500;
+}
+.footer .cc{font-size:10px;color:var(--ink-3);letter-spacing:.1em;text-align:right;line-height:1.6}
+
+/* 右栏 · 海报墙 */
+.right{
+  position:relative;overflow:hidden;
+  padding:48px 48px 32px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:1fr;
+  gap:18px;
+}
+
+.poster{
+  position:relative;overflow:hidden;
+  cursor:pointer;
+  background:#ddd;
+  border:1px solid rgba(0,0,0,.08);
+  transition:transform .4s cubic-bezier(.2,.7,.2,1);
+}
+.poster img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .4s;
+}
+.poster:hover img{transform:scale(1.05)}
+.poster .label{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:14px 14px 12px;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.75) 100%);
+  color:#fff;
+}
+.poster .label .name{
+  font-family:"Noto Serif SC",serif;
+  font-size:14px;font-weight:700;line-height:1.2;
+}
+.poster .label .meta{
+  margin-top:4px;font-size:10px;letter-spacing:.15em;
+  color:rgba(255,255,255,.7);text-transform:uppercase;
+}
+.poster .swatch{
+  position:absolute;top:12px;left:12px;
+  width:10px;height:10px;border-radius:50%;
+  box-shadow:0 0 0 3px rgba(255,255,255,.85);
+}
+
+/* 错落布局 */
+.p-red    {grid-column:span 2;grid-row:span 2}
+.p-cyan   {grid-column:span 2;grid-row:span 1}
+.p-pink   {grid-column:span 1;grid-row:span 1}
+.p-orange {grid-column:span 1;grid-row:span 1}
+.p-purple {grid-column:span 2;grid-row:span 1}
+.p-slate  {grid-column:span 1;grid-row:span 1}
+.p-grey   {grid-column:span 1;grid-row:span 1}
+
+/* Lightbox */
+.lb{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(20,20,20,.94);backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;
+  padding:6vh 6vw;
+}
+.lb.open{display:flex}
+.lb img{
+  max-width:100%;max-height:86vh;object-fit:contain;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+.lb .close{
+  position:absolute;top:24px;right:24px;
+  background:none;border:1px solid rgba(255,255,255,.3);
+  color:#fff;border-radius:999px;padding:8px 18px;
+  font-size:12px;cursor:pointer;letter-spacing:.1em;
+}
+.lb .cap{
+  position:absolute;left:6vw;bottom:4vh;color:#aaa;
+  font-size:12px;letter-spacing:.05em;max-width:600px;
+}
+.lb .cap b{color:#fff;font-family:"Noto Serif SC",serif;
+  font-size:15px;display:block;margin-bottom:4px}
+
+/* 小屏 */
+@media(max-width:900px){
+  html,body{overflow:auto}
+  .stage{height:auto;grid-template-columns:1fr}
+  .left{border-right:none;border-bottom:1px solid var(--line);padding:60px 20px 24px}
+  .right{padding:20px;grid-template-columns:repeat(2,1fr);grid-auto-rows:auto}
+  .p-red,.p-cyan,.p-pink,.p-orange,.p-purple,.p-slate,.p-grey{
+    grid-column:span 1;grid-row:span 1;aspect-ratio:4/3;
+  }
+  .p-red{aspect-ratio:16/10}
+  .slash{font-size:80px}
+}
+</style>
+</head>
+<body>
+
+<div class="spectrum">
+  <span style="background:var(--red)"></span>
+  <span style="background:var(--cyan)"></span>
+  <span style="background:var(--pink)"></span>
+  <span style="background:var(--orange)"></span>
+  <span style="background:var(--purple)"></span>
+  <span style="background:var(--slate)"></span>
+  <span style="background:var(--grey)"></span>
+</div>
+
+<main class="stage">
+
+  <aside class="left">
+    <div>
+      <div class="brand">
+        <div class="logo">AIGC<em>/</em>portfolio</div>
+        <div class="year">© 2026 · GZ</div>
+      </div>
+
+      <div class="hero-block">
+        <div class="slash">/
+          <small>typo/graphic archive · launch</small>
+        </div>
+        <h1>把品牌素材，<br>变成<em>可商用的电竞视觉。</em></h1>
+        <p>49 张 AI 生成作品，按情绪归档。从红黑张力到紫粉霓虹，每一组都是一种视觉语言。</p>
+      </div>
+
+      <div class="stats">
+        <div><b>49</b>张精选图</div>
+        <div><b>7</b>个情绪系列</div>
+        <div><b>03–09</b>月跨度</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="links">
+        <a href="index-v2.html">← 单页叙事版</a>
+        <a href="prompts.html">AI 提示词库 →</a>
+        <a href="mailto:2805059624@qq.com">2805059624@qq.com</a>
+        <a class="primary" href="index-v2.html">进入作品集 →</a>
+      </div>
+      <div class="cc">
+        workflow<br>MJ · Flux · LoRA<br>PS · LR
+      </div>
+    </div>
+  </aside>
+
+  <section class="right" id="wall">
+    <!-- 卡片由 JS 注入 -->
+  </section>
+
+</main>
+
+<div class="lb" id="lb">
+  <button class="close" id="lbClose">关闭 ×</button>
+  <img id="lbImg" src="">
+  <div class="cap" id="lbCap"></div>
+</div>
+
+<script>
+const series = [
+  {id:"red",    cls:"p-red",    color:"#e63329", month:"2026.03", name:"红黑电竞 · RO姬",
+   thumb:"assets/red/r4.jpg", works:10},
+  {id:"cyan",   cls:"p-cyan",   color:"#2bb8c9", month:"2026.04", name:"蓝青冷色 · 初音",
+   thumb:"assets/cyan/c4.jpg", works:12},
+  {id:"pink",   cls:"p-pink",   color:"#f089b3", month:"2026.05", name:"粉白柔美 · 奶白桌搭",
+   thumb:"assets/pink/p1.jpg", works:7},
+  {id:"orange",  cls:"p-orange", color:"#ff8a2a", month:"2026.06", name:"橙黄暖调 · 灯牌",
+   thumb:"assets/orange/o2.jpg", works:5},
+  {id:"purple",  cls:"p-purple", color:"#8a5cf0", month:"2026.07", name:"紫粉霓虹 · ROG",
+   thumb:"assets/purple/u1.jpg", works:9},
+  {id:"slate",   cls:"p-slate",  color:"#5b7a99", month:"2026.08", name:"产品特写 · 耳机",
+   thumb:"assets/cyan/c5.jpg", works:3},
+  {id:"grey",    cls:"p-grey",   color:"#3a3a3a", month:"2026.09", name:"无人桌搭 · 电商图",
+   thumb:"assets/cyan/c1.jpg", works:3},
+];
+
+const wall = document.getElementById("wall");
+series.forEach(s=>{
+  const p = document.createElement("a");
+  p.className = "poster "+s.cls;
+  p.href = "index-v2.html#timeline";
+  p.innerHTML = `
+    <span class="swatch" style="background:${s.color}"></span>
+    <img src="${s.thumb}" alt="${s.name}">
+    <div class="label">
+      <div class="name">${s.name}</div>
+      <div class="meta">${s.month} · ${s.works} works</div>
+    </div>`;
+  p.addEventListener("click",ev=>{
+    // 默认跳转到单页版时间轴；按住 meta 才打开 lightbox 看大图
+    if(!ev.metaKey && !ev.ctrlKey){
+      // 不阻止跳转，让链接自然生效
+      return;
+    }
+    ev.preventDefault();
+    openLB(s.thumb, s.name, s);
+  });
+  wall.appendChild(p);
+});
+
+// Lightbox
+const lb = document.getElementById("lb");
+function openLB(src,title,s){
+  document.getElementById("lbImg").src = src;
+  document.getElementById("lbCap").innerHTML =
+    `<b>${title}</b>${s.name} · ${s.month} · ${s.works} works`;
+  lb.classList.add("open");
+}
+function closeLB(){ lb.classList.remove("open"); }
+document.getElementById("lbClose").addEventListener("click",closeLB);
+lb.addEventListener("click",ev=>{ if(ev.target===lb) closeLB(); });
+document.addEventListener("keydown",ev=>{ if(ev.key==="Escape") closeLB(); });
+</script>
+</body>
+</html>

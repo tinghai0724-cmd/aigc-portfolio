@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 提示词库 · AIGC Portfolio</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#000;color:#fff;font-family:"PingFang SC","Microsoft YaHei","Inter",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:22px 40px;background:linear-gradient(180deg,rgba(0,0,0,.9),transparent);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.nav .logo{font-weight:700}
+.nav .logo span{color:#d13178}
+.nav-links{display:flex;gap:32px}
+.nav-links a{color:rgba(255,255,255,.75);position:relative;padding:4px 0}
+.nav-links a:hover{color:#ff83be}
+
+.kicker{font-size:12px;letter-spacing:.3em;color:#ff83be}
+.section{padding:140px 6vw 80px;max-width:1400px;margin:0 auto}
+h1{margin-top:16px;font-size:clamp(36px,4.5vw,60px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+h1 em{color:#d13178;font-style:italic;font-weight:300}
+.lead{margin-top:20px;color:#9a9a9a;font-size:16px;line-height:1.7;max-width:620px}
+
+.lib{margin-top:60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.card{position:relative;padding:28px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);transition:all .3s;cursor:pointer;display:flex;flex-direction:column}
+.card:hover{border-color:#d13178;background:rgba(209,49,120,.06);transform:translateY(-4px)}
+.card .num{font-family:"Didot","Songti SC",serif;font-size:40px;font-style:italic;color:rgba(209,49,120,.4);line-height:1}
+.card h3{margin-top:16px;font-size:18px;font-weight:700;line-height:1.4}
+.card .file{margin-top:8px;font-size:11px;letter-spacing:.15em;color:#8a8a8a;text-transform:uppercase}
+.card .excerpt{margin-top:16px;font-size:13px;color:#9a9a9a;line-height:1.7;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.card .actions{margin-top:auto;padding-top:20px;display:flex;gap:10px}
+.btn{padding:9px 16px;border-radius:999px;font-size:12px;cursor:pointer;border:1px solid rgba(255,255,255,.2);background:transparent;color:#cfcfcf;transition:all .25s}
+.btn:hover{border-color:#d13178;color:#fff;background:rgba(209,49,120,.15)}
+.btn.primary{background:#d13178;border-color:#d13178;color:#fff}
+.btn.primary:hover{background:#e23d8b}
+
+/* 弹窗 */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.96);backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;padding:5vh 5vw}
+.modal.open{display:flex}
+.modal-box{width:100%;max-width:820px;max-height:88vh;display:flex;flex-direction:column;border-radius:18px;background:#0d0d0d;border:1px solid rgba(255,255,255,.1);overflow:hidden}
+.modal-top{display:flex;justify-content:space-between;align-items:center;padding:24px 32px;border-bottom:1px solid rgba(255,255,255,.08)}
+.modal-top h3{font-size:20px;font-weight:700}
+.modal-top .meta{font-size:12px;color:#8a8a8a;margin-top:4px}
+.modal-top button{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;padding:8px 18px;font-size:12px;cursor:pointer}
+.modal-top button:hover{background:#fff;color:#000}
+.modal-body{flex:1;overflow-y:auto;padding:32px;font-size:14.5px;line-height:2;color:#cfcfcf;white-space:pre-wrap}
+.modal-foot{padding:20px 32px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:flex-end;gap:12px}
+
+.toast{position:fixed;bottom:40px;left:50%;transform:translateX(-50%) translateY(20px);background:#d13178;color:#fff;padding:12px 26px;border-radius:999px;font-size:13px;opacity:0;transition:all .3s;z-index:200;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.foot{padding:40px 6vw;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;font-size:12px;color:#5a5a5a;letter-spacing:.1em;max-width:1400px;margin:0 auto}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="logo">AIGC<span>.</span>作品</div>
+  <div class="nav-links">
+    <a href="index-v2.html">首页</a>
+    <a href="index-v2.html#about">关于</a>
+    <a href="index-v2.html#timeline">作品目录</a>
+    <a href="index-v2.html#contact">联系</a>
+  </div>
+</nav>
+
+<section class="section">
+  <div class="kicker">04 — 提示词库</div>
+  <h1>AI 提示词<br><em>即取即用。</em></h1>
+  <p class="lead">6 篇精选中文提示词，覆盖红黑电竞、ROG 全家桶、初音联名等场景。点击卡片预览全文，一键复制到即梦 / MJ / Flux 使用。</p>
+  <div class="lib" id="lib"></div>
+</section>
+
+<footer class="foot">
+  <div>© 2026 AIGC Portfolio · 版权所有</div>
+  <div>GuangZhou · China</div>
+</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-top">
+      <div>
+        <h3 id="mTitle"></h3>
+        <div class="meta" id="mMeta"></div>
+      </div>
+      <button id="mClose">关闭 ×</button>
+    </div>
+    <div class="modal-body" id="mBody"></div>
+    <div class="modal-foot">
+      <button class="btn" id="mCopy">复制全文</button>
+      <button class="btn primary" id="mCopy2">一键复制</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">已复制到剪贴板 ✓</div>
+
+<script>
+const DOCS = [{"id": 1, "file": "提示词01.docx", "title": "RO姬红黑电竞主机", "text": "展示参考图一的游戏 PC 机箱：主题为 RO Ji（ASUS ROG 联名）限量版游戏主机，主色调为黑色和红色，符合 ROG 的酷炫风格。机箱细节：透明侧透镜机箱，印有 RO Ji 2D 插画，外侧带有 “RO Ji” 徽标，与黑红几何纹理装饰搭配，提升 2D × 电子竞技联合品牌质感。内部硬件：搭载 GeForce 显卡，散热风扇带有红色光效，整洁的水冷管路，以及规整的硬件布局。灯光效果呈现：以红色 RGB 为核心环境光，风扇与机箱装饰区域同步发光，突出黑红主题的酷炫电竞质感。 在ROG电竞展会上进行的照片级真人扮演现场摄影：Coser扮演RO Ji（华硕ROG 2D角色），黑红渐变短发配以猫耳发饰，暗红色瞳孔的2D妆容。她穿着RO Ji主题的黑红科技风服装（短款上衣+黑色短裤+红黑拼接夹克+大腿带饰），衣服上带有ROG标志细节；展馆互动姿势（做“和平”手势），肢体放松以契合展位热闹氛围。场景：ROG电竞展览展位，背景包括“Dare Forward”口号墙、悬挂在工具铁网上的主板硬件/RO Ji Q版娃娃；展位还放置有游戏 PC 机箱、带ROG品牌标识的显示器（展示展会活动屏幕）、键盘，以及RO Ji主题的产品包装盒。此外，展位还布置有其他显卡等硬件设备。灯光：展览现场明亮柔和的灯光，自然突出Cosplay服装质地与展位硬件细节。氛围：展会的生动互动感，融合电竞产品展示与2D Cosplay的融合基调。风格：写实的Cosplay展会现场摄影，真实还原电竞展会的场景纹理。画质：8K分辨率，高细节（Cosplay服装纹理、硬件展示细节），焦点清晰，展位主题构图。"}, {"id": 2, "file": "提示词02.docx", "title": "ROG 全家桶全 RGB", "text": "展示参考图一的游戏 PC 主机：ROG（Republic of Gamers）旗舰级全彩RGB游戏台式机。主题为ROG旗舰游戏台，主色调为黑色底座+全彩渐变RGB灯效，符合ROG的帅气电竞风格。外观细节：黑色底壳印有“REPUBLIC OF GAMERS”文字、ROG标志以及独家纹理装饰，透明侧板完整展示内部硬件布局。内部硬件：配备GeForce RTX显卡、ROG定制液冷系统，辅以多组全彩RGB散热风扇；整齐的硬件布局和管路走向，核心配件（主板、电源）均带ROG标志。灯效呈现：全彩渐变RGB作为核心环境光，风扇、水冷和机箱装饰区同步发光，提升多彩动力下的电竞冷艳质感。 电竞直播间拍摄的写实风格肖像摄影：长发年轻女子，妆容精致；穿着迷彩 tube top 与迷彩 cargo 裤，搭配带文字装饰的黑色棒球帽、手上拿着饮品。桌面前面放在游戏PC主机，前后的遮挡关系。场景：电竞游戏直播间，包括游戏PC主机、粉/红色的电竞椅、桌面以及显示“NARAKA: BLADEPOINT”S7 Blooming Season 屏幕的电竞显示器；桌上同步摆放手办、零食等常见直播道具；环境细节：背景有竖条纹窗帘与室内空调，恢复真实直播空间的日常布局。照明：室内柔光+显示器屏幕光效，自然光影层次，突出妆容质感、服装迷彩纹理及电竞设备细节。氛围：酷感、随性游戏直播基调，融合日常放松与电竞场景沉浸感。风格：写实肖像摄影，聚焦角色与直播场景环境之间的互动。品质：8K分辨率，高细节（服装纹理、耳机纹理、直播设备/游戏屏幕细节）、焦点清晰、电竞直播间主题构图。"}, {"id": 3, "file": "提示词03.docx", "title": "RO姬展会场景", "text": "展示参考图一的游戏 PC 机箱：主题为 RO Ji（ASUS ROG 联名）限量版游戏主机，主色调为黑色和红色，符合 ROG 的酷炫风格。机箱细节：透明侧透镜机箱，印有 RO Ji 2D 插画，外侧带有 “RO Ji” 徽标，与黑红几何纹理装饰搭配，提升 2D × 电子竞技联合品牌质感。内部硬件：搭载 GeForce 显卡，散热风扇带有红色光效，整洁的水冷管路，以及规整的硬件布局。灯光效果呈现：以红色 RGB 为核心环境光，风扇与机箱装饰区域同步发光，突出黑红主题的酷炫电竞质感。 摄影级现场实拍COSPLAY：RO Ji在ROG电竞展览上的现场拍摄场景：Cosplay者扮演RO Ji（华硕ROG 2D角色），黑红短发，搭配猫耳饰发饰，2D风格妆容。她穿着ROG主题的红黑科技风套装（露肩设计＋装饰细节带ROG标志），配以黑红配件；在展台互动姿态，肢体拉伸以契合品牌展位的展示氛围。 场景：ROG电竞展览展位，背景含RO Ji 2D大幅立绘、“REPUBLIC OF GAMERS”品牌标志、“Extraordinary Bloodline, Infinite Attention”口号；展位配有游戏 PC 机箱，以及ROG品牌宣传物料，同时摆放。 光照：明亮的展览现场灯光＋紫色RGB灯效，自然光与阴影层次，突出COS服装质感、ROG标志与设备细节。 氛围：电竞展览的活力感，融合2D COSPLAY联动与品牌硬件展示的基调。 风格：真实现场COS展摄影，还原品牌展览的真实场景。 画质：8K分辨率，高细节（COS服装纹理、ROG标志、设备光效层次）、清晰聚焦、电竞展位主题构图。"}, {"id": 4, "file": "提示词04.docx", "title": "华硕白雪公主主机", "text": "展示参考图一的游戏 PC 主机：一台带透明侧板机箱的华硕游戏桌面电脑，外观设计为全白配色，机箱印有“ASUS CASE”品牌标识；内部硬件配置包括：NVIDIA GeForce RTX 显卡、定制白色水冷系统、多个淡蓝色 RGB 风扇；灯光效果：机箱内部同步的淡蓝色 RGB 灯光，突出全白硬件布局与清新科技风格。 写实写真风格的现场写真，展示 ROG Snow Princess 的鲜明科技风格电竞桌面场景：一位在电竞展览会场的年轻女扮演者，扮演ROG Snow Princess。她有短银白发（带蓝色渐变高光），蓝色双眸，带有ROG Snow Princess角色的标志头饰，精致冷调妆容。她穿着以ROG Snow Princess为主题的机甲风格cosplay服装：无袖机甲上衣（白色+青蓝拼接，带“06”标志），露脐短上衣，带分层带饰；宽松拼接大衣（带ROG品牌标志），腿部功能带；黑色百褶短裙，透明纱腰封群（衣服纹理），白色长手套，青蓝渐变机甲靴。姿势：放松地倚靠在参考图一的游戏 PC 主机旁，契合清新时尚的氛围。场景：清新科技风电竞桌面空间，背景包含百叶窗、穿孔板（带有 “ROG Snow Princess” 徽章、周边装饰品）；桌面配备参考图一的游戏 PC 主机，匹配的电竞外设（键盘、鼠标），显示器上展示 ROG Snow Princess 插画。灯光：明亮的室内柔光 + 电脑淡蓝色 RGB 光效，自然光与环境光的对比，突出衣物质感、设备细节与场景风格。风格：写实 cosplay 摄影；画质：8K 分辨率，高细节（衣物纹理、设备花纹、场景道具细节）、清晰焦点、清新科技风电竞桌面主题构图。"}, {"id": 5, "file": "提示词05.docx", "title": "ROG × 初音未来", "text": "(杰作，顶级 quality，8K，超详细) 展示参考图一的游戏 PC 主机：ROG × Hatsune Miku 联名定制游戏PC 的产品展示： 主题：定制游戏PC（青绿与粉色配色）搭配初音未来图案（蓝绿双尾角色）以及「HATSUNE MIKU」「ROG × MIKU」logo；内部硬件细节：NVIDIA GeForce RTX 显卡、青绿色散热水路、粉色霓虹灯效。主色调为深青色+薄荷绿 背景：青绿色幕帘，科技风环境照明。 风格：真实感产品摄影，带有动漫联名元素；画质：8K分辨率，高细节（机箱纹理、硬件细节、联名LOGO清晰度、角色图案细节），对ROG × Miku 游戏PC 的聚焦清晰。 日常桌面写真风格的 Photorealistic Hatsune Miku coser 拍摄快照：年轻 coser 扮演 Hatsune Miku，拥有蓝绿渐变长发（搭配红黑色发饰），妆容符合二次元风格。她穿着以 Miku 为主题的无袖服装（带全息纹理装饰），黑色长袖印有像素风图案；放松的姿势靠在桌子上，前臂支撑桌面，符合日常快照的自然感。场景：二次元爱好者的桌面空间（白色办公桌）；周边物品：PC游戏主机、Miku 玩偶、Miku 主题立牌；背景是带有收纳格的柜子，柜内可见与 Miku 相关的外设。照明：深色的室内自然光，光影自然细腻，突出发丝光泽、 cosplay 服装纹理及周边细节。氛围：放松、日常生活快照风格，符合二次元爱好者的日常感。风格：写实Cosplay日常快照摄影，贴近生活场景。画质：8K分辨率，高细节（发丝光泽、Cosplay服装纹理、周边装饰细节）、清晰对焦，生活化的桌面日常场景构图。"}, {"id": 6, "file": "提示词06.docx", "title": "黑透侧透玻璃 RGB", "text": "（杰作，最高质量，8K，超细节）展示参考图一的游戏 PC 主机：白色透明机箱电竞主机，幻影RGB灯光：白色透明侧板电竞机箱；内部硬件（水冷管、主板、显卡等）用白色配色，配备多只幻影RGB风扇（覆盖粉色、蓝色、绿色、黄色等渐变色）。灯光：机箱内部幻影RGB多彩灯光（粉/蓝/绿/黄渐变等）。风格：融合硬件的机械科技质感与多彩灯光的时尚装饰感。8K超清纹理，硬件质感，RGB光渐变，线缆细节清晰锐利，画面透明干净。 年轻东亚女性的真实感Cosplay照片，略向上方侧前方视角的视角（遵循近大远小的空间逻辑）：摇滚风格表演者，金发偏浅色；穿着露肩黑色宽松外套（一半穿着）、筒状上衣、带有红格布拼接的 distressed 牛仔裤（布料上贴有号码/头像/图案贴纸），甜美自然；室内柔和偏冷色调光，光线均匀自然。 姿势：人物看镜头，放松地靠在桌子上，前臂支撑桌面，符合日常快照的自然感（不得遮挡产品） 风格：潮流风格，连接磨损牛仔布、格子拼接、街头贴纸等元素，突出衣物的磨损纹理、贴纸细节的质感，兼具摇滚和街头时尚感。 桌面布置：靠窗的电竞桌面，桌面搭配参考图一的游戏 PC 机箱，显示器。视角：略向上方侧前方视角的视角，聚焦在人物和机箱的交互，其他内容部分展示；背景为浅色百叶窗，配备ROG白色显示器，电竞房氛围灯，白色耳机，以及小型2D人偶饰品。通过百叶窗的柔和漫射自然光，与桌面设备的蓝白环境光相结合；明亮而柔和的冷色调光，纹理均匀透明。清新治愈的电竞桌面氛围，结合2D元素的可爱感与电竞硬件的科技感，舒适整洁。 风格：白蓝极简动漫电竞风格，连接极简桌面布局、2D角色元素与电竞硬件的科技质感。 画质：8K超清，硬件质感、高细节（衣物纹理、设备花纹、场景道具细节）镜头聚焦在机箱，机箱处于图片中心位置。"}];
+
+const lib = document.getElementById("lib");
+DOCS.forEach(d=>{
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `
+    <div class="num">0${d.id}</div>
+    <h3>${d.title}</h3>
+    <div class="file">${d.file} · ${d.text.length} 字</div>
+    <div class="excerpt">${d.text.slice(0,90)}…</div>
+    <div class="actions">
+      <button class="btn">预览</button>
+      <button class="btn primary" data-copy="${d.id}">复制</button>
+    </div>`;
+  card.addEventListener("click",()=>openModal(d));
+  lib.appendChild(card);
+});
+
+const modal = document.getElementById("modal");
+let curDoc = null;
+function openModal(d){
+  curDoc = d;
+  document.getElementById("mTitle").textContent = d.title;
+  document.getElementById("mMeta").textContent = d.file + " · " + d.text.length + " 字";
+  document.getElementById("mBody").textContent = d.text;
+  modal.classList.add("open");
+}
+document.getElementById("mClose").addEventListener("click",()=>modal.classList.remove("open"));
+modal.addEventListener("click",e=>{ if(e.target===modal) modal.classList.remove("open"); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") modal.classList.remove("open"); });
+
+function copyText(t){
+  navigator.clipboard.writeText(t).then(showToast).catch(()=>{
+    const ta = document.createElement("textarea");
+    ta.value = t; document.body.appendChild(ta); ta.select();
+    document.execCommand("copy"); ta.remove(); showToast();
+  });
+}
+function showToast(){
+  const t = document.getElementById("toast");
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 1800);
+}
+document.getElementById("mCopy").addEventListener("click",()=>curDoc && copyText(curDoc.text));
+document.getElementById("mCopy2").addEventListener("click",()=>curDoc && copyText(curDoc.text));
+document.querySelectorAll("[data-copy]").forEach(btn=>{
+  btn.addEventListener("click",e=>{
+    e.stopPropagation();
+    const d = DOCS.find(x=>x.id==btn.dataset.copy);
+    if(d) copyText(d.text);
+  });
+});
+</script>
+</body>
+</html>

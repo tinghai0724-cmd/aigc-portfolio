@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>AIGC 作品 · 宣传海报 16:9</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  width:1920px;height:1080px;overflow:hidden;
+  background:#0a0a0a;color:#fff;
+  font-family:"PingFang SC","Microsoft YaHei","Inter",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+
+/* 左右两张图，中间斜线分割 */
+.split{
+  position:absolute;inset:0;
+  display:grid;grid-template-columns:1fr 1fr;
+  clip-path:polygon(0 0, 55% 0, 45% 100%, 0 100%);
+}
+.split .left{
+  background:url("poster-assets/red.jpg") center/cover no-repeat;
+  filter:brightness(.75) saturate(1.1);
+}
+.split2{
+  position:absolute;inset:0;
+  clip-path:polygon(55% 0, 100% 0, 100% 100%, 45% 100%);
+}
+.split2 .right{
+  width:100%;height:100%;
+  background:url("poster-assets/cyan.jpg") center/cover no-repeat;
+  filter:brightness(.75) saturate(1.1);
+}
+
+/* 整体压暗渐变 */
+.veil{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.1) 30%,rgba(0,0,0,.3) 60%,rgba(0,0,0,.85) 100%),
+    linear-gradient(90deg,rgba(213,49,120,.15) 0%,transparent 50%,rgba(56,200,216,.15) 100%);
+}
+
+/* 顶部信息条 */
+.topbar{
+  position:absolute;top:0;left:0;right:0;z-index:5;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:40px 80px;
+  font-size:14px;letter-spacing:.3em;color:rgba(255,255,255,.7);
+}
+.topbar .logo{font-weight:800;font-size:18px;letter-spacing:.1em;color:#fff}
+.topbar .logo span{color:#d13178}
+
+/* 中心标题 */
+.center{
+  position:absolute;inset:0;z-index:3;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:0 80px;
+}
+.kicker{
+  font-size:14px;letter-spacing:.5em;color:#ff83be;margin-bottom:24px;
+  padding:8px 20px;border:1px solid rgba(255,131,190,.4);border-radius:999px;
+  background:rgba(0,0,0,.4);backdrop-filter:blur(10px);
+}
+.title{
+  font-size:120px;font-weight:900;letter-spacing:-.02em;line-height:1.02;
+  color:#fff;
+  text-shadow:0 4px 40px rgba(0,0,0,.8);
+}
+.title em{
+  font-style:italic;font-weight:300;
+  background:linear-gradient(90deg,#ff83be 0%,#38c8d8 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{
+  margin-top:28px;font-size:20px;line-height:1.6;color:rgba(255,255,255,.85);font-weight:300;
+  max-width:800px;text-shadow:0 2px 20px rgba(0,0,0,.8);
+}
+
+/* 底部数据条 */
+.bottom{
+  position:absolute;left:0;right:0;bottom:0;z-index:5;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:40px 80px;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.85));
+}
+.stats{display:flex;gap:80px}
+.stat .num{
+  font-size:42px;font-weight:800;color:#fff;line-height:1;
+}
+.stat .num em{color:#d13178;font-style:normal}
+.stat .label{
+  margin-top:8px;font-size:12px;letter-spacing:.2em;color:rgba(255,255,255,.5);
+}
+.cta{
+  padding:16px 36px;border-radius:999px;
+  background:#d13178;color:#fff;font-size:14px;font-weight:600;letter-spacing:.1em;
+  box-shadow:0 10px 40px rgba(209,49,120,.5);
+}
+
+/* 左右角落标记 */
+.tag-l,.tag-r{
+  position:absolute;top:50%;z-index:4;
+  font-size:12px;letter-spacing:.4em;color:rgba(255,255,255,.6);
+  writing-mode:vertical-rl;
+}
+.tag-l{left:40px;transform:translateY(-50%) rotate(180deg)}
+.tag-r{right:40px;transform:translateY(-50%)}
+.tag-l strong{color:#e63329;display:block;margin-bottom:16px}
+.tag-r strong{color:#38c8d8;display:block;margin-bottom:16px}
+</style>
+</head>
+<body>
+
+<div class="split"><div class="left"></div></div>
+<div class="split2"><div class="right"></div></div>
+<div class="veil"></div>
+
+<div class="topbar">
+  <div class="logo">AIGC<span>.</span>作品</div>
+  <div>PORTFOLIO · 2026</div>
+</div>
+
+<div class="tag-l"><strong>RED / BLACK</strong>RO姬 · 明日香 · 电竞张力</div>
+<div class="tag-r"><strong>CYAN / BLUE</strong>初音 · 天选 · 冷感高级</div>
+
+<div class="center">
+  <div class="kicker">AIGC VISUAL PORTFOLIO</div>
+  <h1 class="title">把品牌素材，<br>变成可商用的<em>电竞视觉。</em></h1>
+  <p class="sub">156 张 AI 生成作品 · 7 种情绪系列 · 从红黑的张力，到紫粉的霓虹</p>
+</div>
+
+<div class="bottom">
+  <div class="stats">
+    <div class="stat"><div class="num"><em>156</em></div><div class="label">张作品</div></div>
+    <div class="stat"><div class="num"><em>7</em></div><div class="label">情绪系列</div></div>
+    <div class="stat"><div class="num">MJ · Flux · LoRA</div><div class="label">工作流</div></div>
+  </div>
+  <div class="cta">查看作品集 →</div>
+</div>
+
+</body>
+</html>

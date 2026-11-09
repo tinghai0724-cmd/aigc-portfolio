@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280">
+<title>Studio — Landing</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:#000;color:#fff;font-family:"Inter","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+body{
+  position:relative;overflow-x:hidden;
+  padding:80px 40px 120px;
+}
+
+/* ---------- Light beams ---------- */
+.beam{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  filter:blur(80px);
+}
+.beam-left{
+  top:-20%;left:-20%;
+  width:60vw;height:80vh;
+  transform:rotate(20deg);
+  background:radial-gradient(ellipse at center,
+    rgba(255,131,190,.75) 0%,
+    rgba(209,49,120,.40) 45%,
+    rgba(209,49,120,0) 85%);
+}
+.beam-right{
+  top:-20%;right:-20%;
+  width:60vw;height:80vh;
+  transform:rotate(-20deg);
+  background:radial-gradient(ellipse at center,
+    rgba(255,131,190,.75) 0%,
+    rgba(209,49,120,.40) 45%,
+    rgba(209,49,120,0) 85%);
+}
+
+/* ---------- Layout ---------- */
+.wrap{
+  position:relative;z-index:1;
+  max-width:1280px;margin:0 auto;
+  display:flex;flex-direction:column;align-items:center;
+}
+
+/* Pill badge */
+.pill{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 18px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(10px);
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#c9c9c9;
+}
+.pill .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#ff83be;
+  box-shadow:0 0 12px #ff83be;
+}
+
+/* Text block */
+.title{
+  margin-top:36px;text-align:center;
+  font-size:clamp(56px,8vw,110px);
+  font-weight:800;letter-spacing:-.04em;line-height:1.0;
+  background:linear-gradient(180deg,#ffffff 0%,#6f6f6f 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.subtitle{
+  margin-top:22px;text-align:center;max-width:720px;
+  font-size:20px;font-weight:400;color:#8a8a8a;line-height:1.6;
+}
+
+/* Buttons */
+.btn-row{margin-top:44px;display:flex;gap:16px;align-items:center}
+.btn-primary{
+  padding:16px 34px;border-radius:999px;border:none;cursor:pointer;
+  font-size:14px;font-weight:600;letter-spacing:.05em;color:#fff;
+  background:linear-gradient(90deg,#7a7a7a 0%,#d13178 100%);
+  box-shadow:0 10px 40px rgba(209,49,120,.35);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 50px rgba(209,49,120,.5)}
+.btn-secondary{
+  padding:16px 34px;border-radius:999px;cursor:pointer;
+  font-size:14px;font-weight:500;letter-spacing:.05em;color:#cfcfcf;
+  background:transparent;border:1px solid rgba(255,255,255,.25);
+  transition:all .25s ease;
+}
+.btn-secondary:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.45)}
+
+/* ---------- Dashboard ---------- */
+.dash{
+  margin-top:64px;
+  width:1150px;height:750px;
+  border-radius:20px;
+  background:rgba(20,20,24,.55);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);
+  box-shadow:0 40px 120px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.05);
+  display:grid;
+  grid-template-columns:220px 1fr 260px;
+  overflow:hidden;
+}
+
+/* Sidebar */
+.sidebar{
+  padding:24px 18px;border-right:1px solid rgba(255,255,255,.06);
+  display:flex;flex-direction:column;gap:6px;
+}
+.side-logo{font-weight:700;font-size:14px;letter-spacing:.05em;margin-bottom:18px;color:#fff}
+.side-logo span{color:#d13178}
+.side-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:8px;
+  font-size:13px;color:#9a9a9a;cursor:pointer;
+  transition:all .2s;
+}
+.side-item:hover{background:rgba(255,255,255,.05);color:#fff}
+.side-item.active{background:rgba(209,49,120,.18);color:#fff}
+.side-item .ico{width:14px;height:14px;border-radius:3px;background:rgba(255,255,255,.2)}
+.side-item.active .ico{background:#ff83be}
+
+/* Middle */
+.middle{
+  padding:24px;display:grid;grid-template-rows:1fr 1fr;gap:20px;min-width:0;
+}
+.panel{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;padding:20px;
+  display:flex;flex-direction:column;
+}
+.panel-head{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;
+}
+.panel-title{font-size:13px;font-weight:600;color:#eaeaea;letter-spacing:.04em}
+.panel-tag{font-size:11px;color:#7a7a7a}
+
+/* Bar chart */
+.chart{
+  flex:1;display:flex;align-items:flex-end;gap:12px;padding-top:8px;
+}
+.bar{
+  flex:1;border-radius:6px 6px 0 0;
+  background:linear-gradient(180deg,#ff83be 0%,#d13178 100%);
+  opacity:.85;
+}
+.bar:nth-child(2n){background:linear-gradient(180deg,#9aa0ff 0%,#5a60c8 100%)}
+.bar:nth-child(3n){background:linear-gradient(180deg,#7ad6ff 0%,#3a8ec8 100%)}
+
+/* Log list */
+.log{display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.log-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 12px;border-radius:8px;
+  background:rgba(255,255,255,.03);
+  font-size:12px;
+}
+.log-row .l-time{color:#7a7a7a;font-variant-numeric:tabular-nums}
+.log-row .l-msg{color:#cfcfcf;flex:1;margin:0 16px}
+.log-row .l-tag{padding:3px 8px;border-radius:999px;font-size:10px;letter-spacing:.1em;background:rgba(209,49,120,.2);color:#ff83be}
+.log-row .l-tag.ok{background:rgba(120,255,180,.12);color:#7affb8}
+
+/* Right config */
+.config{
+  padding:24px 20px;border-left:1px solid rgba(255,255,255,.06);
+  display:flex;flex-direction:column;gap:18px;
+}
+.cfg-block label{font-size:11px;color:#8a8a8a;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:8px}
+.cfg-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 12px;border-radius:8px;background:rgba(255,255,255,.03);
+  font-size:13px;color:#e0e0e0;
+}
+.switch{
+  width:36px;height:20px;border-radius:999px;background:rgba(255,255,255,.15);
+  position:relative;cursor:pointer;transition:background .2s;
+}
+.switch::after{
+  content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;
+  background:#fff;transition:left .2s;
+}
+.switch.on{background:#d13178}
+.switch.on::after{left:18px}
+
+/* footer */
+.foot{margin-top:60px;font-size:12px;color:#5a5a5a;letter-spacing:.1em}
+
+/* ---------- Timeline ---------- */
+.timeline{
+  margin-top:100px;width:min(1100px,92vw);
+  position:relative;padding:40px 0;
+}
+.timeline::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;
+  background:linear-gradient(180deg,rgba(255,131,190,0) 0%,#d13178 15%,#d13178 85%,rgba(255,131,190,0) 100%);
+  transform:translateX(-50%);
+}
+.tl-item{
+  position:relative;width:50%;padding:40px 60px;
+  opacity:0;transform:translateY(60px);
+  transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1);
+}
+.tl-item.in{opacity:1;transform:translateY(0)}
+.tl-item:nth-child(odd){left:0;text-align:right}
+.tl-item:nth-child(even){left:50%;text-align:left}
+.tl-dot{
+  position:absolute;top:60px;width:18px;height:18px;border-radius:50%;
+  background:#ff83be;box-shadow:0 0 0 4px rgba(255,131,190,.2),0 0 24px #ff83be;
+}
+.tl-item:nth-child(odd) .tl-dot{right:-9px}
+.tl-item:nth-child(even) .tl-dot{left:-9px}
+.tl-date{
+  font-size:12px;letter-spacing:.3em;color:#ff83be;text-transform:uppercase;margin-bottom:10px;
+}
+.tl-title{
+  font-size:28px;font-weight:700;color:#fff;letter-spacing:-.01em;margin-bottom:8px;
+}
+.tl-desc{font-size:14px;color:#9a9a9a;line-height:1.6;margin-bottom:18px}
+.tl-img{
+  display:inline-block;width:100%;max-width:380px;aspect-ratio:4/3;
+  border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.tl-img img{width:100%;height:100%;object-fit:cover;display:block}
+
+@media(max-width:780px){
+  .timeline::before{left:20px}
+  .tl-item{width:100%;left:0!important;text-align:left!important;padding:30px 0 30px 50px}
+  .tl-item:nth-child(odd) .tl-dot,
+  .tl-item:nth-child(even) .tl-dot{left:11px;right:auto}
+}
+</style>
+</head>
+<body>
+  <div class="beam beam-left"></div>
+  <div class="beam beam-right"></div>
+
+  <div class="wrap">
+    <div class="pill"><span class="dot"></span> Studio Portfolio · 2026</div>
+
+    <h1 class="title">Design with taste.</h1>
+    <p class="subtitle">极简、高级、大气的视觉作品集。围绕电竞主机、产品场景与人物肖像，以分类归档与动效呈现每一组作品。</p>
+
+    <div class="btn-row">
+      <button class="btn-primary">进入作品集</button>
+      <button class="btn-secondary">了解更多</button>
+    </div>
+
+    <div class="dash">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="side-logo">STUDIO<span>.</span></div>
+        <div class="side-item active"><span class="ico"></span>总览</div>
+        <div class="side-item"><span class="ico"></span>红黑电竞</div>
+        <div class="side-item"><span class="ico"></span>蓝青冷色</div>
+        <div class="side-item"><span class="ico"></span>粉白柔美</div>
+        <div class="side-item"><span class="ico"></span>橙黄暖调</div>
+        <div class="side-item"><span class="ico"></span>紫粉霓虹</div>
+        <div class="side-item"><span class="ico"></span>设置</div>
+      </aside>
+
+      <!-- Middle: chart + log -->
+      <section class="middle">
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title">作品数量分布</div>
+            <div class="panel-tag">This week</div>
+          </div>
+          <div class="chart">
+            <div class="bar" style="height:60%"></div>
+            <div class="bar" style="height:85%"></div>
+            <div class="bar" style="height:45%"></div>
+            <div class="bar" style="height:70%"></div>
+            <div class="bar" style="height:90%"></div>
+            <div class="bar" style="height:55%"></div>
+            <div class="bar" style="height:75%"></div>
+            <div class="bar" style="height:40%"></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title">最新动态</div>
+            <div class="panel-tag">Live</div>
+          </div>
+          <div class="log">
+            <div class="log-row"><span class="l-time">10:24</span><span class="l-msg">新增红黑电竞作品 12 张</span><span class="l-tag">NEW</span></div>
+            <div class="log-row"><span class="l-time">09:41</span><span class="l-msg">蓝青冷色合集已更新</span><span class="l-tag ok">OK</span></div>
+            <div class="log-row"><span class="l-time">09:12</span><span class="l-msg">紫粉霓虹待审核 4 张</span><span class="l-tag">WAIT</span></div>
+            <div class="log-row"><span class="l-time">08:30</span><span class="l-msg">网站主题色已切换为 #d13178</span><span class="l-tag ok">OK</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right config -->
+      <aside class="config">
+        <div class="cfg-block">
+          <label>配置</label>
+          <div class="cfg-row">光束效果 <div class="switch on"></div></div>
+          <div class="cfg-row">深色模式 <div class="switch on"></div></div>
+          <div class="cfg-row">自动播放 <div class="switch"></div></div>
+          <div class="cfg-row">网格布局 <div class="switch on"></div></div>
+        </div>
+        <div class="cfg-block">
+          <label>主题色</label>
+          <div class="cfg-row">#d13178</div>
+          <div class="cfg-row">#ff83be</div>
+        </div>
+        <div class="cfg-block">
+          <label>存储</label>
+          <div class="cfg-row">已使用 48.2 MB</div>
+          <div class="cfg-row">总计 156 张作品</div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="timeline" id="timeline"></section>
+
+    <div class="foot">© 2026 STUDIO — All works reserved</div>
+  </div>
+</body>
+<script>
+const events = [
+  {date:"MAR 2026", title:"红黑电竞 · RO姬彗星", desc:"以明日香、RO姬为主题的黑红装机与COS场景合集。", img:"assets/red/r4.jpg"},
+  {date:"APR 2026", title:"蓝青冷色 · 未来初音", desc:"冰蓝氛围主机 + 初音COS，搭配电竞房霓虹灯带。", img:"assets/cyan/c4.jpg"},
+  {date:"MAY 2026", title:"粉白柔美 · 奶白桌搭", desc:"白瓷主机、旗袍人物与暖光桌面，主打柔和高级感。", img:"assets/pink/p1.jpg"},
+  {date:"JUN 2026", title:"橙黄暖调 · 门店灯牌", desc:"华硕旗舰店橙色灯牌墙与橘猫少女房间场景。", img:"assets/orange/o2.jpg"},
+  {date:"JUL 2026", title:"紫粉霓虹 · ROG 旗舰", desc:"Hi霓虹灯墙 + ROG紫光灯效，赛博感拉满。", img:"assets/purple/u1.jpg"},
+  {date:"AUG 2026", title:"产品特写 · 耳机外设", desc:"白/黑两款ROG耳机手持特写，蓝青背景调性。", img:"assets/cyan/c5.jpg"},
+  {date:"SEP 2026", title:"无人桌搭 · 静态陈列", desc:"纯桌面+主机+外设的电商主图，无人物出镜。", img:"assets/cyan/c1.jpg"},
+];
+const tl = document.getElementById("timeline");
+events.forEach(e=>{
+  const item = document.createElement("div");
+  item.className = "tl-item";
+  item.innerHTML = `
+    <div class="tl-dot"></div>
+    <div class="tl-date">${e.date}</div>
+    <div class="tl-title">${e.title}</div>
+    <div class="tl-desc">${e.desc}</div>
+    <div class="tl-img"><img src="${e.img}" alt=""></div>`;
+  tl.appendChild(item);
+});
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add("in"); });
+},{threshold:.2});
+document.querySelectorAll(".tl-item").forEach(el=>io.observe(el));
+</script>
+</html>
