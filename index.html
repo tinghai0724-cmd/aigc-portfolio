@@ -78,6 +78,19 @@ body::after{
   font-family:"Orbitron","Inter",sans-serif;
 }
 .brand .logo em{font-style:normal;color:var(--accent-2)}
+.brand .brand-group{display:flex;align-items:center}
+.signature{
+  display:inline-flex;align-items:baseline;gap:8px;
+  margin-left:14px;padding-left:14px;
+  border-left:1px solid rgba(255,255,255,.22);
+  font-size:12px;letter-spacing:.3em;
+  color:rgba(244,244,248,.92);font-weight:500;
+}
+.signature em{
+  font-style:normal;font-size:10px;letter-spacing:.28em;
+  color:var(--accent-2);text-transform:uppercase;font-weight:700;
+  font-family:"Orbitron","Inter",sans-serif;
+}
 .brand .year{
   color:var(--ink-3);font-size:11px;letter-spacing:.2em;
   font-family:"Orbitron",sans-serif;
@@ -276,6 +289,9 @@ body::after{
   html,body{height:auto;overflow:auto}
   .stage{height:auto;grid-template-columns:1fr}
   .left{border-right:none;border-bottom:1px solid var(--line);padding:60px 20px 24px}
+  .brand-group{flex-wrap:wrap;row-gap:6px}
+  .signature{font-size:11px;letter-spacing:.24em;margin-left:10px;padding-left:10px}
+  .signature em{font-size:9px;letter-spacing:.2em}
   .right{padding:20px;height:auto;overflow:visible}
   #wall{position:relative;inset:auto;display:flex;flex-direction:column;gap:16px;height:auto}
   .poster{position:relative !important;top:auto !important;left:auto !important;transform:none !important;width:100% !important}
@@ -301,7 +317,10 @@ body::after{
   <aside class="left">
     <div>
       <div class="brand">
-        <div class="logo">AIGC<em>//</em>ESPORTS</div>
+        <div class="brand-group">
+          <div class="logo">AIGC<em>//</em>ESPORTS</div>
+          <span class="signature">张庭海 <em>tinghai</em></span>
+        </div>
         <div class="year">© 2026 · GZ</div>
       </div>
 
