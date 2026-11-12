@@ -511,7 +511,7 @@ body{overflow-x:hidden}
       <p class="lead">专注电竞主机、产品场景与人物肖像的 AIGC 视觉生产，让每一张图都能直接用于电商详情页、社媒物料与品牌 campaign。</p>
     </div>
     <div class="about-grid">
-      <div class="about-img reveal"><img src="assets/about.jpg" alt=""></div>
+      <div class="about-img reveal"><img src="assets/thumb/about.jpg" alt=""></div>
       <div class="about-text reveal">
         <p>从原始机箱图出发，通过场景重建、人物植入、氛围调色，把工业产品转译为有情绪、有故事的视觉资产。每一组作品都经过筛选、分类、归档，确保可复用、可追溯。</p>
         <div class="workflow">
@@ -535,28 +535,28 @@ body{overflow-x:hidden}
       <div class="steps">
         <div class="step">
           <div class="step-num">01</div>
-          <div class="step-img"><img src="assets/steps/step1.jpg" alt=""></div>
+          <div class="step-img"><img src="assets/thumb/steps/step1.jpg" alt=""></div>
           <div class="step-title">原始机箱图</div>
           <div class="step-desc">电商原图，工业产品，光线平、无情绪</div>
           <span class="step-tag">SOURCE</span>
         </div>
         <div class="step">
           <div class="step-num">02</div>
-          <div class="step-img"><img src="assets/steps/step2.jpg" alt=""></div>
+          <div class="step-img"><img src="assets/thumb/steps/step2.jpg" alt=""></div>
           <div class="step-title">AI 场景重复筛选</div>
           <div class="step-desc">多轮生成几十张候选，从构图与灯效中反复挑出最优</div>
           <span class="step-tag">ITERATE</span>
         </div>
         <div class="step">
           <div class="step-num">03</div>
-          <div class="step-img"><img src="assets/steps/step3.jpg" alt=""></div>
+          <div class="step-img"><img src="assets/thumb/steps/step3.jpg" alt=""></div>
           <div class="step-title">AI 提示词构建</div>
           <div class="step-desc">撰写并打磨中文提示词，锁定角色、场景与灯效关键词</div>
           <span class="step-tag">PROMPT</span>
         </div>
         <div class="step">
           <div class="step-num">04</div>
-          <div class="step-img"><img src="assets/steps/step4.jpg" alt=""></div>
+          <div class="step-img"><img src="assets/thumb/steps/step4.jpg" alt=""></div>
           <div class="step-title">后期调色归档</div>
           <div class="step-desc">Photoshop 精修 + Lightroom 统一色调，按情绪分类归档</div>
           <span class="step-tag">FINAL</span>
@@ -706,6 +706,9 @@ const events = [
       {src:"assets/cyan/c3.jpg",d:"白机箱特写，无人物，电商详情页"}]},
 ];
 
+
+function thumbOf(src){ return src.replace("assets/", "assets/thumb/"); }
+
 const track = document.getElementById("track");
 events.forEach((e,i)=>{
   const card = document.createElement("div");
@@ -715,7 +718,7 @@ events.forEach((e,i)=>{
     <div class="tl-date">${e.date}</div>
     <div class="tl-title">${e.title}</div>
     <div class="tl-desc">${e.desc}</div>
-    <div class="tl-thumb"><img src="${e.imgs[0].src}" alt=""></div>
+    <div class="tl-thumb"><img src="${thumbOf(e.imgs[0].src)}" alt="" loading="lazy"></div>
     <div class="tl-more">查看 ${e.imgs.length} 张 →</div>`;
   card.addEventListener("click",()=>openModal(e,i));
   track.appendChild(card);
@@ -751,7 +754,7 @@ function openModal(e, i){
     const wrap = document.createElement("div");
     wrap.className = "img-wrap " + layouts[k % layouts.length];
     const im = document.createElement("img");
-    im.src = item.src; im.alt = item.d;
+    im.src = thumbOf(item.src); im.alt = item.d; im.loading = "lazy";
     im.addEventListener("click",()=>openLightbox(k));
     const cap = document.createElement("div");
     cap.className = "img-cap";

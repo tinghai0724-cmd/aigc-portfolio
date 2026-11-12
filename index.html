@@ -321,19 +321,19 @@ body::after{
 <script>
 const series = [
   {id:"red",    color:"#e63329", month:"2026.03", name:"红黑电竞 · RO姬",
-   thumb:"assets/red/r4.jpg", works:10},
+   thumb:"assets/thumb/red/r4.jpg", works:10},
   {id:"cyan",   color:"#2bb8c9", month:"2026.04", name:"蓝青冷色 · 初音",
-   thumb:"assets/cyan/c4.jpg", works:12},
+   thumb:"assets/thumb/cyan/c4.jpg", works:12},
   {id:"pink",   color:"#f089b3", month:"2026.05", name:"粉白柔美 · 奶白桌搭",
-   thumb:"assets/pink/p1.jpg", works:7},
+   thumb:"assets/thumb/pink/p1.jpg", works:7},
   {id:"orange",  color:"#ff8a2a", month:"2026.06", name:"橙黄暖调 · 灯牌",
-   thumb:"assets/orange/o2.jpg", works:5},
+   thumb:"assets/thumb/orange/o2.jpg", works:5},
   {id:"purple",  color:"#8a5cf0", month:"2026.07", name:"紫粉霓虹 · iGame × ROG",
-   thumb:"assets/purple/u1.jpg", works:14},
+   thumb:"assets/thumb/purple/u1.jpg", works:14},
   {id:"slate",   color:"#5b7a99", month:"2026.08", name:"产品特写 · 耳机",
-   thumb:"assets/cyan/c5.jpg", works:3},
+   thumb:"assets/thumb/cyan/c5.jpg", works:3},
   {id:"grey",    color:"#3a3a3a", month:"2026.09", name:"无人桌搭 · 电商图",
-   thumb:"assets/cyan/c1.jpg", works:3},
+   thumb:"assets/thumb/cyan/c1.jpg", works:3},
 ];
 
 const wall = document.getElementById("wall");
@@ -363,7 +363,7 @@ series.forEach((s,i)=>{
   p.addEventListener("click",ev=>{
     if(!ev.metaKey && !ev.ctrlKey){ return; }
     ev.preventDefault();
-    openLB(s.thumb, s.name, s);
+    openLB(s.thumb.replace("assets/thumb/", "assets/"), s.name, s);
   });
   wall.appendChild(p);
 });
