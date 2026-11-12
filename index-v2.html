@@ -291,6 +291,27 @@ body{overflow-x:hidden}
 .c-gpu:hover .tl-title{color:#5fd6a4}
 .c-gpu .tl-more{color:#5fd6a4}
 
+.c-portrait .tl-dot{background:#ff7ab8;box-shadow:0 0 16px #ff7ab8}
+.c-portrait .tl-date{color:#ff7ab8}
+.c-portrait .tl-thumb{border-color:rgba(255,122,184,.3)}
+.c-portrait:hover .tl-thumb{border-color:#ff7ab8}
+.c-portrait:hover .tl-title{color:#ff7ab8}
+.c-portrait .tl-more{color:#ff7ab8}
+
+.c-scene  .tl-dot{background:#7fb0ff;box-shadow:0 0 16px #7fb0ff}
+.c-scene  .tl-date{color:#7fb0ff}
+.c-scene  .tl-thumb{border-color:rgba(127,176,255,.3)}
+.c-scene:hover .tl-thumb{border-color:#7fb0ff}
+.c-scene:hover .tl-title{color:#7fb0ff}
+.c-scene .tl-more{color:#7fb0ff}
+
+.c-cinema .tl-dot{background:#ffb03a;box-shadow:0 0 16px #ffb03a}
+.c-cinema .tl-date{color:#ffb03a}
+.c-cinema .tl-thumb{border-color:rgba(255,176,58,.3)}
+.c-cinema:hover .tl-thumb{border-color:#ffb03a}
+.c-cinema:hover .tl-title{color:#ffb03a}
+.c-cinema .tl-more{color:#ffb03a}
+
 /* ===== CONTACT ===== */
 .contact{text-align:center;padding:200px 6vw}
 .contact .pre{
@@ -745,6 +766,88 @@ const events = [
       {src:"assets/gpu/g10.jpg",d:"RTX 5060 Ti X2W 双风扇显卡，灰调背景，结构细节"},
       {src:"assets/gpu/g11.jpg",d:"RTX 5060 Ti X3W 三风扇显卡，浅色背景，产品特写"},
       {src:"assets/gpu/g12.jpg",d:"RTX 5060 X2W 双风扇显卡，白色装甲，干净棚拍"}]},
+  {date:"2026.11", title:"显卡矩阵 · 多品牌", cls:"c-gpu", color:"#5fd6a4",
+   desc:"RTX 50 系多品牌显卡，黑白双色，产品级布光。",
+   prompt:"RTX 50 系显卡产品摄影，ROG STRIX / TUF / PRIME / DUAL / 映众 多品牌，金属装甲，双风扇与三风扇结构，暗调灯效或纯色棚拍，8K 高细节",
+   imgs:[
+      {src:"assets/gpu50/p01.jpg",d:"华硕 DUAL RTX 5070 / 5060 双风扇显卡，紧凑短卡造型"},
+      {src:"assets/gpu50/p02.jpg",d:"华硕 DUAL RTX 5070 / 5060 双风扇显卡，紧凑短卡造型"},
+      {src:"assets/gpu50/p03.jpg",d:"映众 RTX 5070 Ti 曜夜 X3 三风扇显卡，暗夜灯效设计"},
+      {src:"assets/gpu50/p04.jpg",d:"映众 RTX 5070 映雪显卡，白色三风扇散热装甲"},
+      {src:"assets/gpu50/p05.jpg",d:"映众 RTX 5070 曜夜 X3 三风扇显卡，暗夜灯效设计"},
+      {src:"assets/gpu50/p06.jpg",d:"华硕 PRIME RTX 5070 16G 显卡，极简黑色装甲，产品正视图"},
+      {src:"assets/gpu50/p07.jpg",d:"华硕 PRIME RTX 5080 16G 显卡，三风扇结构，暗调棚拍"},
+      {src:"assets/gpu50/p08.jpg",d:"ROG STRIX RTX 5070 Ti 三风扇显卡，电竞装甲设计，暗场灯效"},
+      {src:"assets/gpu50/p09.jpg",d:"ROG STRIX RTX 5070 Ti 三风扇显卡，电竞装甲设计，暗场灯效"},
+      {src:"assets/gpu50/p10.jpg",d:"ROG STRIX RTX 50 系 三风扇显卡，电竞装甲设计，暗场灯效"},
+      {src:"assets/gpu50/p11.jpg",d:"映众 RTX 5060 曜夜 X2 OC 8G 双风扇显卡，黑色短卡"},
+      {src:"assets/gpu50/p12.jpg",d:"华硕 TUF BTF 白色背插显卡，隐藏走线设计，干净棚拍"},
+      {src:"assets/gpu50/p13.jpg",d:"华硕 TUF BTF 白色背插显卡，隐藏走线设计，干净棚拍"},
+      {src:"assets/gpu50/p14.jpg",d:"华硕 TUF RTX 5070 Ti 16G 电竞特工显卡，军工风散热装甲"},
+      {src:"assets/gpu50/p15.jpg",d:"华硕 TUF RTX 5070 Ti 16G 电竞特工显卡，军工风散热装甲"},
+      {src:"assets/gpu50/p16.jpg",d:"TX GAMING RTX 5060 12G 显卡，双风扇结构，电商主图"},
+      {src:"assets/gpu50/p17.jpg",d:"七彩虹 iGame Vulcan 火神显卡，旗舰散热装甲，灯效细节"},
+      {src:"assets/gpu50/p18.jpg",d:"华硕 夜神显卡，暗场灯效，旗舰产品特写"}]},
+  {date:"2026.11", title:"人物角色 · 写真", cls:"c-portrait", color:"#ff7ab8",
+   desc:"COS 与角色写真，霓虹环境光。",
+   prompt:"电竞房内的人物角色写真，COS 造型，霓虹环境光，85mm 人像景深，电影感布光，8K 细节",
+   imgs:[
+      {src:"assets/portrait/h01.jpg",d:"人物角色写真，电竞氛围布光，85mm 人像质感"},
+      {src:"assets/portrait/h02.jpg",d:"少女角色特写，霓虹环境光，浅景深虚化"},
+      {src:"assets/portrait/h03.jpg",d:"角色半身像，冷调补光，赛博氛围"},
+      {src:"assets/portrait/h04.jpg",d:"COS 角色全身构图，灯带点缀，电影感布光"},
+      {src:"assets/portrait/h05.jpg",d:"二次元角色写真，柔和轮廓光，干净背景"},
+      {src:"assets/portrait/h06.jpg",d:"人物侧脸特写，逆光轮廓，高级质感"},
+      {src:"assets/portrait/h07.jpg",d:"人物角色写真，电竞氛围布光，85mm 人像质感"},
+      {src:"assets/portrait/h08.jpg",d:"少女角色特写，霓虹环境光，浅景深虚化"},
+      {src:"assets/portrait/h09.jpg",d:"角色半身像，冷调补光，赛博氛围"},
+      {src:"assets/portrait/h10.jpg",d:"COS 角色全身构图，灯带点缀，电影感布光"},
+      {src:"assets/portrait/h11.jpg",d:"二次元角色写真，柔和轮廓光，干净背景"},
+      {src:"assets/portrait/h12.jpg",d:"人物侧脸特写，逆光轮廓，高级质感"},
+      {src:"assets/portrait/h13.jpg",d:"人物角色写真，电竞氛围布光，85mm 人像质感"},
+      {src:"assets/portrait/h14.jpg",d:"少女角色特写，霓虹环境光，浅景深虚化"},
+      {src:"assets/portrait/h15.jpg",d:"角色半身像，冷调补光，赛博氛围"},
+      {src:"assets/portrait/h16.jpg",d:"COS 角色全身构图，灯带点缀，电影感布光"},
+      {src:"assets/portrait/h17.jpg",d:"二次元角色写真，柔和轮廓光，干净背景"},
+      {src:"assets/portrait/h18.jpg",d:"人物侧脸特写，逆光轮廓，高级质感"},
+      {src:"assets/portrait/h19.jpg",d:"人物角色写真，电竞氛围布光，85mm 人像质感"},
+      {src:"assets/portrait/h20.jpg",d:"少女角色特写，霓虹环境光，浅景深虚化"},
+      {src:"assets/portrait/h21.jpg",d:"角色半身像，冷调补光，赛博氛围"},
+      {src:"assets/portrait/h22.jpg",d:"COS 角色全身构图，灯带点缀，电影感布光"},
+      {src:"assets/portrait/h23.jpg",d:"二次元角色写真，柔和轮廓光，干净背景"},
+      {src:"assets/portrait/h24.jpg",d:"人物侧脸特写，逆光轮廓，高级质感"}]},
+  {date:"2026.11", title:"场景氛围 · 桌搭", cls:"c-scene", color:"#7fb0ff",
+   desc:"电竞空间与桌搭氛围，暗调灯效。",
+   prompt:"赛博电竞空间场景，RGB 灯带与霓虹倒影，暗调氛围，超广角构图，电影感光影，8K 高细节",
+   imgs:[
+      {src:"assets/ambience/s01.jpg",d:"电竞场景氛围图，霓虹灯带，电影感构图"},
+      {src:"assets/ambience/s02.jpg",d:"暗调桌搭场景，RGB 灯效，工业质感"},
+      {src:"assets/ambience/s03.jpg",d:"赛博空间场景，紫蓝冷光，超广视角"},
+      {src:"assets/ambience/s04.jpg",d:"产品场景陈列，氛围光渲染，高级灰调"},
+      {src:"assets/ambience/s05.jpg",d:"室内电竞氛围，环境光层次，暖冷对比"},
+      {src:"assets/ambience/s06.jpg",d:"电竞场景氛围图，霓虹灯带，电影感构图"},
+      {src:"assets/ambience/s07.jpg",d:"暗调桌搭场景，RGB 灯效，工业质感"},
+      {src:"assets/ambience/s08.jpg",d:"赛博空间场景，紫蓝冷光，超广视角"},
+      {src:"assets/ambience/s09.jpg",d:"产品场景陈列，氛围光渲染，高级灰调"},
+      {src:"assets/ambience/s10.jpg",d:"室内电竞氛围，环境光层次，暖冷对比"},
+      {src:"assets/ambience/s11.jpg",d:"电竞场景氛围图，霓虹灯带，电影感构图"},
+      {src:"assets/ambience/s12.jpg",d:"暗调桌搭场景，RGB 灯效，工业质感"},
+      {src:"assets/ambience/s13.jpg",d:"赛博空间场景，紫蓝冷光，超广视角"},
+      {src:"assets/ambience/s14.jpg",d:"产品场景陈列，氛围光渲染，高级灰调"},
+      {src:"assets/ambience/s15.jpg",d:"室内电竞氛围，环境光层次，暖冷对比"},
+      {src:"assets/ambience/s16.jpg",d:"电竞场景氛围图，霓虹灯带，电影感构图"},
+      {src:"assets/ambience/s17.jpg",d:"暗调桌搭场景，RGB 灯效，工业质感"},
+      {src:"assets/ambience/s18.jpg",d:"赛博空间场景，紫蓝冷光，超广视角"},
+      {src:"assets/ambience/s19.jpg",d:"产品场景陈列，氛围光渲染，高级灰调"},
+      {src:"assets/ambience/s20.jpg",d:"室内电竞氛围，环境光层次，暖冷对比"},
+      {src:"assets/ambience/s21.jpg",d:"电竞场景氛围图，霓虹灯带，电影感构图"}]},
+  {date:"2026.11", title:"宽幅影像 · 电影感", cls:"c-cinema", color:"#ffb03a",
+   desc:"16:9 宽幅场景，叙事构图。",
+   prompt:"16:9 电影画幅场景，超广视角纵深构图，霓虹氛围光，叙事感画面，8K 超清",
+   imgs:[
+      {src:"assets/cinema/w01.jpg",d:"宽幅电影感场景，超广视角，氛围光渲染"},
+      {src:"assets/cinema/w02.jpg",d:"16:9 电影画幅场景，纵深构图，霓虹氛围"},
+      {src:"assets/cinema/w03.jpg",d:"宽幅叙事场景，光影层次，8K 细节"}]},
 ];
 
 

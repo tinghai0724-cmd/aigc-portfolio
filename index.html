@@ -329,7 +329,7 @@ body::after{
           <small>esports visual archive · vol.01</small>
         </div>
         <h1>把品牌素材，<br>变成<em>电竞视觉。</em></h1>
-        <p>66 张超高清 AI 生成作品，按品类与情绪系列归档。RAW 画质 · 高细节 · 霓虹美学，每一组都是一种可商用的视觉语言。</p>
+        <p>132 张超高清 AI 生成作品，按品类与情绪系列归档。RAW 画质 · 高细节 · 霓虹美学，每一组都是一种可商用的视觉语言。</p>
         <div class="tag-row">
           <span class="tag">RAW</span>
           <span class="tag">8K</span>
@@ -339,9 +339,9 @@ body::after{
       </div>
 
       <div class="stats">
-        <div><b>66<i>+</i></b>张精选图</div>
-        <div><b>8</b>个品类系列</div>
-        <div><b>03–10</b>月跨度</div>
+        <div><b>132<i>+</i></b>张精选图</div>
+        <div><b>12</b>个品类系列</div>
+        <div><b>03–11</b>月跨度</div>
       </div>
     </div>
 
@@ -392,6 +392,14 @@ const series = [
    thumb:"assets/thumb/cyan/c1.jpg", works:3},
   {id:"gpu",     color:"#5fd6a4", month:"2026.10", name:"显卡新品 · AX 电竞叛客",
    thumb:"assets/thumb/gpu/g1.jpg", works:12},
+  {id:"gpu50",   color:"#5fd6a4", month:"2026.11", name:"显卡矩阵 · 多品牌",
+   thumb:"assets/thumb/gpu50/p08.jpg", works:18},
+  {id:"portrait", color:"#ff7ab8", month:"2026.11", name:"人物角色 · 写真",
+   thumb:"assets/thumb/portrait/h04.jpg", works:24},
+  {id:"scene",   color:"#7fb0ff", month:"2026.11", name:"场景氛围 · 桌搭",
+   thumb:"assets/thumb/ambience/s02.jpg", works:21},
+  {id:"cinema",  color:"#ffb03a", month:"2026.11", name:"宽幅影像 · 电影感",
+   thumb:"assets/thumb/cinema/w01.jpg", works:3},
 ];
 
 const wall = document.getElementById("wall");
@@ -408,14 +416,17 @@ series.forEach((s,i)=>{
     </div>`;
   const W = wall.clientWidth, H = wall.clientHeight;
   const n = series.length;
-  const cardW = W * 0.54, cardH = cardW * 10 / 16;
-  const stepX = Math.min(26, Math.max(14, (W - cardW) / 8));
-  const stepY = Math.min(18, Math.max(10, (H - cardH) / 8));
+  const pad = 24;
+  const availW = W - pad * 2, availH = H - pad * 2;
+  const cardW = availW * (n >= 10 ? 0.46 : 0.54), cardH = cardW * 10 / 16;
+  const stepX = Math.min(n >= 10 ? 42 : 26, Math.max(14, (availW - cardW) / Math.max(1, n - 1)));
+  const stepY = Math.min(n >= 10 ? 38 : 18, Math.max(10, (availH - cardH) / Math.max(1, n - 1)));
   const startX = (W - cardW - stepX * (n - 1)) / 2;
   const startY = (H - cardH - stepY * (n - 1)) / 2;
   const rot = (i - (n - 1) / 2) * 0.9;
   p.style.top = (startY + stepY * i) + "px";
   p.style.left = (startX + stepX * i) + "px";
+  p.style.width = cardW + "px";
   p.style.transform = "rotate(" + rot.toFixed(2) + "deg)";
   p.style.zIndex = i;
   p.addEventListener("click",ev=>{
