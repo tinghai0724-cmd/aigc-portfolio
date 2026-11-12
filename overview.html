@@ -144,16 +144,50 @@ body::after{
 .footer .links a{color:var(--ink-2);transition:color .2s}
 .footer .links a:hover{color:var(--ink)}
 .footer .links a.primary{
-  display:inline-flex;align-items:center;gap:8px;margin-top:10px;
+  display:inline-flex;align-items:center;gap:8px;
   padding:12px 20px;border-radius:999px;
   background:linear-gradient(135deg, var(--accent-2), var(--accent));
   color:#fff;font-weight:700;letter-spacing:.06em;
   box-shadow:0 8px 28px rgba(209,49,120,.45);
-  transition:transform .2s, box-shadow .2s;
+  position:relative;overflow:hidden;isolation:isolate;
+  transition:transform .18s cubic-bezier(.2,.7,.2,1), box-shadow .25s, filter .25s;
 }
 .footer .links a.primary:hover{
-  transform:translateY(-1px);
-  box-shadow:0 12px 36px rgba(209,49,120,.6);
+  box-shadow:0 14px 40px rgba(209,49,120,.7);
+  filter:brightness(1.08);
+}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.footer .links a.ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 20px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.04);
+  color:#f4f4f8;font-weight:600;letter-spacing:.06em;
+  position:relative;overflow:hidden;isolation:isolate;
+  backdrop-filter:blur(6px);
+  transition:transform .18s cubic-bezier(.2,.7,.2,1), border-color .25s, background .25s, box-shadow .25s;
+}
+.footer .links a.ghost:hover{
+  border-color:var(--accent-2);
+  background:rgba(209,49,120,.16);
+  box-shadow:0 12px 34px rgba(209,49,120,.35);
+}
+/* 光标光斑 */
+.btn-row a::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(110px circle at var(--mx,50%) var(--my,50%),
+    rgba(255,255,255,.35), rgba(255,255,255,0) 65%);
+  opacity:0;transition:opacity .25s;
+}
+.btn-row a:hover::before{opacity:1}
+.btn-row a .arw{
+  display:inline-block;
+  transition:transform .25s cubic-bezier(.2,.7,.2,1);
+}
+.btn-row a:hover .arw{transform:translateX(4px)}
+.btn-row a.ghost:hover .arw{transform:translate(3px,-3px)}
+.footer .links a.primary,
+.footer .links a.ghost{will-change:transform}
 }
 .footer .cc{font-size:10px;color:var(--ink-3);letter-spacing:.14em;text-align:right;line-height:1.7}
 .footer .cc b{color:var(--accent-2);font-family:"Orbitron",sans-serif;font-weight:700}
@@ -297,7 +331,10 @@ body::after{
         <a href="index-v2.html">← 单页叙事版</a>
         <a href="prompts.html">AI 提示词库 →</a>
         <a href="mailto:2805059624@qq.com">2805059624@qq.com</a>
-        <a class="primary" href="index-v2.html">进入作品集 →</a>
+        <div class="btn-row">
+          <a class="primary magnetic" href="index-v2.html">进入 AI 作品页 <span class="arw">→</span></a>
+          <a class="ghost magnetic" href="portfolio.pdf" target="_blank" rel="noopener">浏览作品集 <span class="arw">↗</span></a>
+        </div>
       </div>
       <div class="cc">
         <b>WORKFLOW</b><br>
@@ -379,6 +416,25 @@ function closeLB(){ lb.classList.remove("open"); }
 document.getElementById("lbClose").addEventListener("click",closeLB);
 lb.addEventListener("click",ev=>{ if(ev.target===lb) closeLB(); });
 document.addEventListener("keydown",ev=>{ if(ev.key==="Escape") closeLB(); });
+
+// 按钮：光标磁吸 + 光斑跟随
+document.querySelectorAll(".btn-row a.magnetic").forEach(btn=>{
+  const strength = 7;
+  btn.addEventListener("mousemove",ev=>{
+    const r = btn.getBoundingClientRect();
+    const x = ev.clientX - r.left, y = ev.clientY - r.top;
+    btn.style.setProperty("--mx", x + "px");
+    btn.style.setProperty("--my", y + "px");
+    const dx = (x - r.width / 2) / (r.width / 2);
+    const dy = (y - r.height / 2) / (r.height / 2);
+    btn.style.transform = `translate(${(dx*strength).toFixed(2)}px, ${(dy*strength*0.6).toFixed(2)}px)`;
+  });
+  btn.addEventListener("mouseleave",()=>{
+    btn.style.transform = "";
+    btn.style.setProperty("--mx","50%");
+    btn.style.setProperty("--my","50%");
+  });
+});
 </script>
 </body>
 </html>
